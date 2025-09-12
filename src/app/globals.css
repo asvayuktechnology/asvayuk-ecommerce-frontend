@@ -1,0 +1,109 @@
+@import "tailwindcss";
+@plugin "flowbite-react/plugin/tailwindcss";
+@source "../../.flowbite-react/class-list.json";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+
+body {
+  /* background: var(--background); */
+  font-family: sans-serif, Helvetica !important ;
+}
+
+.bannerbg{
+  background: url("../../public/images/banner/bgbanner.jpg");
+}
+
+.bannercarouselwrapper > div > div::-webkit-scrollbar {
+  display: none !important;
+}
+
+.bannercarouselwrapper [data-testid="carousel-indicator"] {
+  @apply w-2.5 h-2.5;
+}
+
+
+.paginationOrder ul {
+    display: flex;
+    align-items: center;
+    margin-top: 10px
+}
+
+.paginationOrder ul li:first-child {
+    margin-left: 0
+}
+
+.page--item {
+    border: 1px solid #e2e8f0;
+    text-align: center;
+    margin: 0 7px
+}
+
+.page--item,.page--link {
+    width: 28px;
+    height: 28px;
+    line-height: 25px
+}
+
+.page--link,.page-previous-link {
+    font-size: 14px;
+    font-weight: 500
+}
+
+.page-previous-link {
+    padding: 5px 10px;
+    border: 1px solid #e2e8f0
+}
+
+.page-previous-link:hover {
+    border: 1px solid #10b981;
+    background-color: #10b981;
+    color: #fff
+}
+
+.page-next-link {
+    padding: 5px 10px;
+    border: 1px solid #e2e8f0;
+    font-size: 14px;
+    font-weight: 500
+}
+
+.page-next-link:hover {
+    border: 1px solid #10b981;
+    background-color: #10b981;
+    color: #fff
+}
+
+.page--link:hover {
+    color: #000
+}
+
+.activePagination {
+    text-align: center;
+    border-radius: 3px;
+    background: #10b981;
+    border: 1px solid #10b981;
+    color: #fff
+}
+
+/* Home 2 Page */
+.testimonialSection{
+  background: linear-gradient(121deg,rgba(248,237,236,1),rgba(239,249,246,1) 50.719%,rgba(248,237,236,1) 95%);
+}
