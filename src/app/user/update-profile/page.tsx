@@ -23,7 +23,7 @@ const page = () => {
             <div className="md:grid md:grid-cols-3 md:gap-6">
                 <div className="md:col-span-1">
                     <div className="px-4 sm:px-0">
-                        <h2 className="text-xl  font-semibold mb-5">
+                        <h2 className="text-xl  font-semibold mb-5 text-black">
                             Update Profile
                         </h2>
                     </div>

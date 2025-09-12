@@ -59,7 +59,7 @@ const Pagination: React.FC<PaginationProps> = ({
                                 className={`px-3 py-1 rounded-md cursor-pointer ${
                                     page === currentPage
                                         ? "bg-green-500 text-white"
-                                        : "bg-gray-100"
+                                        : "bg-gray-100 text-black"
                                 }`}
                             >
                                 {page}

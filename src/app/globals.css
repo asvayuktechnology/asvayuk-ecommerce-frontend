@@ -21,13 +21,20 @@
   }
 }
 
-
 body {
-  /* background: var(--background); */
-  font-family: sans-serif, Helvetica !important ;
+  width: 100%;
+  min-height: 100svh;
 }
 
-.bannerbg{
+p {
+  font-size: 16px;
+  line-height: 24px;
+  font-style: normal;
+  color: var(--background);
+  font-weight: 400;
+}
+
+.bannerbg {
   background: url("../../public/images/banner/bgbanner.jpg");
 }
 
@@ -39,71 +46,77 @@ body {
   @apply w-2.5 h-2.5;
 }
 
-
 .paginationOrder ul {
-    display: flex;
-    align-items: center;
-    margin-top: 10px
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .paginationOrder ul li:first-child {
-    margin-left: 0
+  margin-left: 0;
 }
 
 .page--item {
-    border: 1px solid #e2e8f0;
-    text-align: center;
-    margin: 0 7px
+  border: 1px solid #e2e8f0;
+  text-align: center;
+  margin: 0 7px;
 }
 
-.page--item,.page--link {
-    width: 28px;
-    height: 28px;
-    line-height: 25px
+.page--item,
+.page--link {
+  width: 28px;
+  height: 28px;
+  line-height: 25px;
 }
 
-.page--link,.page-previous-link {
-    font-size: 14px;
-    font-weight: 500
+.page--link,
+.page-previous-link {
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .page-previous-link {
-    padding: 5px 10px;
-    border: 1px solid #e2e8f0
+  padding: 5px 10px;
+  border: 1px solid #e2e8f0;
 }
 
 .page-previous-link:hover {
-    border: 1px solid #10b981;
-    background-color: #10b981;
-    color: #fff
+  border: 1px solid #10b981;
+  background-color: #10b981;
+  color: #fff;
 }
 
 .page-next-link {
-    padding: 5px 10px;
-    border: 1px solid #e2e8f0;
-    font-size: 14px;
-    font-weight: 500
+  padding: 5px 10px;
+  border: 1px solid #e2e8f0;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .page-next-link:hover {
-    border: 1px solid #10b981;
-    background-color: #10b981;
-    color: #fff
+  border: 1px solid #10b981;
+  background-color: #10b981;
+  color: #fff;
 }
 
 .page--link:hover {
-    color: #000
+  color: #000;
 }
 
 .activePagination {
-    text-align: center;
-    border-radius: 3px;
-    background: #10b981;
-    border: 1px solid #10b981;
-    color: #fff
+  text-align: center;
+  border-radius: 3px;
+  background: #10b981;
+  border: 1px solid #10b981;
+  color: #fff;
 }
 
 /* Home 2 Page */
-.testimonialSection{
-  background: linear-gradient(121deg,rgba(248,237,236,1),rgba(239,249,246,1) 50.719%,rgba(248,237,236,1) 95%);
+.testimonialSection {
+  background: linear-gradient(
+    121deg,
+    rgba(248, 237, 236, 1),
+    rgba(239, 249, 246, 1) 50.719%,
+    rgba(248, 237, 236, 1) 95%
+  );
 }

@@ -1,175 +1,136 @@
+"use client";
+
+import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { 
+  FiHome, 
+  FiShoppingCart, 
+  FiStar, 
+  FiUser, 
+  FiEdit, 
+  FiLock, 
+  FiLogOut 
+} from "react-icons/fi";
 
 const Usersidebar: React.FC = () => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+
+  const links = [
+    { href: "/user/dashboard", label: "Dashboard", icon: FiHome },
+    { href: "/user/my-orders", label: "My Orders", icon: FiShoppingCart },
+    { href: "/user/my-reviews", label: "My Review", icon: FiStar },
+    { href: "/user/my-account", label: "My Account", icon: FiUser },
+    { href: "/user/update-profile", label: "Update Profile", icon: FiEdit },
+    { href: "/user/change-password", label: "Change Password", icon: FiLock },
+  ];
+
   return (
-    <div className="bg-white p-4 sm:p-5 lg:p-8 rounded-md sticky top-32">
-      <span className="p-2 my-2 flex  items-center rounded-md hover:bg-gray-50 w-full hover:text-emerald-600">
-        <svg
-          stroke="currentColor"
-          fill="none"
-          strokeWidth={2}
-          viewBox="0 0 24 24"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="flex-shrink-0 h-4 w-4"
-          aria-hidden="true"
-          height="1em"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
+    <div className="flex flex-col lg:flex-row w-full">
+      {/* Mobile toggle button */}
+      <div className="lg:hidden mt-6 mx-3">
+        <button
+          onClick={() => setMobileOpen(!mobileOpen)}
+          className="flex items-center justify-between w-full p-3 bg-gray-50 rounded-md transition-all"
         >
-          <rect x={3} y={3} width={7} height={7} />
-          <rect x={14} y={3} width={7} height={7} />
-          <rect x={14} y={14} width={7} height={7} />
-          <rect x={3} y={14} width={7} height={7} />
-        </svg>
-        <Link
-          className="inline-flex items-center justify-between ml-2 text-sm font-medium w-full hover:text-emerald-600"
-          href="/user/dashboard"
-        >
-          Dashboard
-        </Link>
-      </span>
-      <span className="p-2 my-2 flex  items-center rounded-md hover:bg-gray-50 w-full hover:text-emerald-600">
-        <svg
-          stroke="currentColor"
-          fill="none"
-          strokeWidth={2}
-          viewBox="0 0 24 24"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="flex-shrink-0 h-4 w-4"
-          aria-hidden="true"
-          height="1em"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <line x1={8} y1={6} x2={21} y2={6} />
-          <line x1={8} y1={12} x2={21} y2={12} />
-          <line x1={8} y1={18} x2={21} y2={18} />
-          <line x1={3} y1={6} x2="3.01" y2={6} />
-          <line x1={3} y1={12} x2="3.01" y2={12} />
-          <line x1={3} y1={18} x2="3.01" y2={18} />
-        </svg>
-        <Link
-          className="inline-flex items-center justify-between ml-2 text-sm font-medium w-full hover:text-emerald-600"
-          href="/user/my-orders"
-        >
-          My Orders
-        </Link>
-      </span>
-      <span className="p-2 my-2 flex  items-center rounded-md hover:bg-gray-50 w-full hover:text-emerald-600">
-        <svg
-          stroke="currentColor"
-          fill="none"
-          strokeWidth={2}
-          viewBox="0 0 24 24"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="flex-shrink-0 h-4 w-4"
-          aria-hidden="true"
-          height="1em"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-          <circle cx={12} cy={7} r={4} />
-        </svg>
-        <Link
-          className="inline-flex items-center justify-between ml-2 text-sm font-medium w-full hover:text-emerald-600"
-          href="/user/my-account"
-        >
-          My Account
-        </Link>
-      </span>
-      <span className="p-2 my-2 flex  items-center rounded-md hover:bg-gray-50 w-full hover:text-emerald-600">
-        <svg
-          stroke="currentColor"
-          fill="none"
-          strokeWidth={2}
-          viewBox="0 0 24 24"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="flex-shrink-0 h-4 w-4"
-          aria-hidden="true"
-          height="1em"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <circle cx={12} cy={12} r={3} />
-          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
-        </svg>
-        <Link
-          className="inline-flex items-center justify-between ml-2 text-sm font-medium w-full hover:text-emerald-600"
-          href="/user/update-profile"
-        >
-          Update Profile
-        </Link>
-      </span>
-      <span className="p-2 my-2 flex  items-center rounded-md hover:bg-gray-50 w-full hover:text-emerald-600">
-        <svg
-          stroke="currentColor"
-          fill="none"
-          strokeWidth={2}
-          viewBox="0 0 24 24"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="flex-shrink-0 h-4 w-4"
-          aria-hidden="true"
-          height="1em"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-          <polyline points="14 2 14 8 20 8" />
-          <line x1={16} y1={13} x2={8} y2={13} />
-          <line x1={16} y1={17} x2={8} y2={17} />
-          <polyline points="10 9 9 9 8 9" />
-        </svg>
-        <Link
-          className="inline-flex items-center justify-between ml-2 text-sm font-medium w-full hover:text-emerald-600"
-          href="/user/change-password"
-        >
-          Change Password
-        </Link>
-      </span>
-      <span className="p-2 flex  items-center rounded-md hover:bg-gray-50 w-full hover:text-emerald-600">
-        <span className="mr-2">
+          <div className="flex items-center">
+            <div className="relative w-10 h-10 rounded-full border-2 border-gray-200 flex items-center justify-center bg-gray-100 overflow-hidden">
+              <Image
+                src="https://res.cloudinary.com/ahossain/image/upload/v1754928399/uhqj0mqfh8if6gsrusqq.jpg"
+                alt="avatar"
+                width={32}
+                height={32}
+                className="h-8 w-8 rounded-full bg-gray-50"
+              />
+            </div>
+            <div className="ml-3">
+              <h5 className="text-md font-semibold text-gray-800">rock</h5>
+              <p className="text-sm text-gray-500">justin@gmail.com</p>
+            </div>
+          </div>
           <svg
-            stroke="currentColor"
-            fill="currentColor"
-            strokeWidth={0}
-            viewBox="0 0 512 512"
-            height="1em"
-            width="1em"
             xmlns="http://www.w3.org/2000/svg"
+            className="w-6 h-6 text-gray-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-            <path
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={32}
-              d="M336 112a80 80 0 00-160 0v96"
-            />
-            <rect
-              width={320}
-              height={272}
-              x={96}
-              y={208}
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={32}
-              rx={48}
-              ry={48}
-            />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 9l6 6 6-6" />
           </svg>
-        </span>{" "}
-        <button className="inline-flex items-center justify-between text-sm font-medium w-full hover:text-emerald-600">
-          Logout
         </button>
-      </span>
+      </div>
+
+      {/* Sidebar menu */}
+      <div
+        className={`flex-shrink-0 w-full lg:w-80 lg:pr-6 ${
+          mobileOpen ? "block" : "hidden lg:block"
+        }`}
+      >
+        <div className="rounded-md sticky top-32 space-y-4 bg-white p-4 sm:p-5 lg:p-8">
+          {/* User profile */}
+          <div className="flex items-center mb-6">
+            <div className="relative w-16 h-16">
+              <div className="relative w-16 h-16 rounded-full border-2 border-gray-200 flex items-center justify-center bg-gray-100 overflow-hidden">
+                <Image
+                  src="https://res.cloudinary.com/ahossain/image/upload/v1754928399/uhqj0mqfh8if6gsrusqq.jpg"
+                  alt="avatar"
+                  width={64}
+                  height={64}
+                  className="h-16 w-16 rounded-full bg-gray-50"
+                />
+              </div>
+              <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white" />
+            </div>
+            <div className="ml-3">
+              <h5 className="text-lg font-semibold text-gray-800">rock</h5>
+              <p className="text-sm text-gray-500">justin@gmail.com</p>
+            </div>
+          </div>
+
+          {/* Sidebar links */}
+          {links.map((link) => (
+            <SidebarLink
+              key={link.href}
+              href={link.href}
+              label={link.label}
+              Icon={link.icon}
+              active={pathname === link.href}
+            />
+          ))}
+
+          {/* Logout */}
+          <button className="flex items-center w-full p-2 rounded-md hover:bg-gray-50 text-gray-600 text-sm font-medium mt-2">
+            <FiLogOut className="w-4 h-4 mr-2" />
+            Logout
+          </button>
+        </div>
+      </div>
     </div>
+  );
+};
+
+interface SidebarLinkProps {
+  href: string;
+  label: string;
+  Icon: React.ElementType;
+  active?: boolean;
+}
+
+const SidebarLink: React.FC<SidebarLinkProps> = ({ href, label, Icon, active }) => {
+  return (
+    <Link
+      href={href}
+      className={`inline-flex items-center rounded-md py-3 px-4 text-sm font-medium w-full mb-1 transition-colors ${
+        active
+          ? "text-emerald-600 bg-emerald-100"
+          : "text-gray-600 hover:bg-gray-100 hover:text-emerald-600"
+      }`}
+    >
+      <Icon className="w-5 h-5 mr-3" />
+      {label}
+    </Link>
   );
 };
 

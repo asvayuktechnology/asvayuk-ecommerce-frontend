@@ -6,7 +6,7 @@ import Pagination from "@/components/ui/common/pagination/Pagination";
 const page = () => {
   return (
     <div className="overflow-hidden">
-      <h2 className="text-xl font-semibold mb-5">Dashboard</h2>
+      <h2 className="text-xl font-semibold mb-5 text-black">Dashboard</h2>
       <div className="grid gap-4 mb-8 md:grid-cols-2 xl:grid-cols-4">
         <div className="flex h-full">
           <div className="flex items-center border border-gray-200 w-full rounded-lg p-4">
@@ -128,12 +128,11 @@ const page = () => {
       <div className="max-w-screen-2xl mx-auto">
         <div className="rounded-md ">
           <div className="flex flex-col">
-            <h3 className="text-lg  font-medium mb-5">Recent Orders</h3>
+            <h3 className="text-lg  font-medium mb-5 text-black">Recent Orders</h3>
             <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div className="align-middle inline-block border border-gray-100 rounded-md min-w-full pb-2 sm:px-6 lg:px-8">
                 <div className="overflow-hidden border-b last:border-b-0 border-gray-100 rounded-md">
                   <Orderstable />
-                  <Pagination />
                 </div>
               </div>
             </div>
