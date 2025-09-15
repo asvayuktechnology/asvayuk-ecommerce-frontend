@@ -9,6 +9,7 @@ import BannerCarousel from "@/components/ui/common/carousel/BannerCarousel";
 import AppImages from "@/config/constant/app.images";
 import { getProducts } from "@/services/productService";
 import FeaturedCategories from "./FeaturedCategories";
+import CouponCard from "@/components/products/couponCard/CouponCard";
 
 interface Product {
   id: number;
@@ -18,10 +19,53 @@ interface Product {
   image: string;
 }
 
+interface Coupon {
+  id: number;
+  image: string;
+  title: string;
+  discount: string;
+  couponCode: string;
+  status: "Active" | "Inactive";
+  deadline: Date;
+}
+
+interface Timer {
+  days: string;
+  hours: string;
+  minutes: string;
+  seconds: string;
+}
+
+const COUPONS: Coupon[] = [
+  {
+    id: 1,
+    image: AppImages.categories.ins1,
+    title: "August Gift Voucher",
+    discount: "50%",
+    couponCode: "AUGUST24",
+    status: "Active",
+    deadline: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
+  },
+  {
+    id: 2,
+    image: AppImages.categories.ins1,
+    title: "Monsoon Sale",
+    discount: "30%",
+    couponCode: "MONSOON30",
+    status: "Active",
+    deadline: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
+  },
+];
+
 const Home: React.FC = () => {
   const [data, setData] = useState<Product[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+  const [timers, setTimers] = useState<Record<number, Timer>>({});
+  const [statuses, setStatuses] = useState<
+    Record<number, "Active" | "Inactive">
+  >({});
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -41,6 +85,52 @@ const Home: React.FC = () => {
     setIsModalOpen(true);
   };
 
+  const handleCopy = (idx: number, code: string) => {
+    navigator.clipboard.writeText(code);
+    setCopiedIndex(idx);
+    setTimeout(() => setCopiedIndex(null), 2000);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const updatedTimers: Record<number, Timer> = {};
+      const updatedStatuses: Record<number, "Active" | "Inactive"> = {};
+
+      COUPONS.forEach((coupon) => {
+        const now = new Date();
+        const diff = coupon.deadline.getTime() - now.getTime();
+
+        if (diff <= 0) {
+          updatedTimers[coupon.id] = {
+            days: "00",
+            hours: "00",
+            minutes: "00",
+            seconds: "00",
+          };
+          updatedStatuses[coupon.id] = "Inactive";
+        } else {
+          const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+          const m = Math.floor((diff / 1000 / 60) % 60);
+          const s = Math.floor((diff / 1000) % 60);
+
+          updatedTimers[coupon.id] = {
+            days: String(d).padStart(2, "0"),
+            hours: String(h).padStart(2, "0"),
+            minutes: String(m).padStart(2, "0"),
+            seconds: String(s).padStart(2, "0"),
+          };
+          updatedStatuses[coupon.id] = "Active";
+        }
+      });
+
+      setTimers(updatedTimers);
+      setStatuses(updatedStatuses);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       <section className="bannerwrapper bg-white">
@@ -58,139 +148,27 @@ const Home: React.FC = () => {
                 </div>
 
                 <div className="overflow-hidden">
-                  <div className="coupon coupon-home mx-4 my-5 block md:flex lg:flex md:justify-between lg:justify-between items-center bg-white rounded-md shadow">
-                    <div className="tengah py-2 px-3 flex items-center justify-items-start">
-                      <figure>
-                        <Image
-                          alt="August Gift Voucher"
-                          width={100}
-                          height={100}
-                          className="rounded-lg"
-                          src={AppImages.categories.ins1}
-                        />
-                      </figure>
-                      <div className="ml-3">
-                        <div className="flex items-center ">
-                          <h6 className="pl-1 text-base font-medium text-gray-600">
-                            <span className="text-lg md:text-xl lg:text-xl text-red-500 font-bold">
-                              50%
-                            </span>{" "}
-                            Off
-                          </h6>
-                          <div className="ml-2">
-                            <span className="text-green-600 inline-block px-4 py-1 rounded-full font-medium text-xs bg-green-100">
-                              Active
-                            </span>
-                          </div>
-                        </div>
-                        <h2 className="pl-1  text-base text-gray-700 leading-6 font-semibold mb-2">
-                          August Gift Voucher
-                        </h2>
-                        <span className="inline-block mb-2">
-                          <div className="flex items-center font-semibold">
-                            {["00", "00", "00", "00"].map((item, index) => (
-                              <span
-                                key={index}
-                                className="flex items-center justify-center bg-green-500 text-white text-sm  font-semibold mx-1 px-2 py-1 rounded"
-                              >
-                                {item}
-                              </span>
-                            ))}
-                          </div>
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="md:border-l-2 lg:border-l-2 border-dashed border-[#E2E8F0] lg:w-1/3 md:w-1/3 relative px-4">
-                      <div className="info flex items-center">
-                        <div className="w-full">
-                          <div className="block">
-                            <div className=" border border-dashed bg-emerald-50 py-1 border-emerald-300 rounded-lg text-center block">
-                              <button className="block w-full cursor-pointer">
-                                <span className="uppercase  font-semibold text-sm leading-7 text-emerald-600">
-                                  AUGUST24
-                                </span>
-                              </button>
-                            </div>
-                          </div>
-                          <p
-                            className="leading-4 text-gray-500 dark:text-gray-300 mt-2"
-                            style={{ fontSize: "12px", lineHeight: "20px" }}
-                          >
-                            * This coupon apply when shopping more than{" "}
-                            <span className="font-bold">$2000</span>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="coupon coupon-home mx-4 my-5 block md:flex lg:flex md:justify-between lg:justify-between items-center bg-white rounded-md shadow">
-                    <div className="tengah py-2 px-3 flex items-center justify-items-start">
-                      <figure>
-                        <Image
-                          alt="Summer Gift Voucher"
-                          width={100}
-                          height={100}
-                          className="rounded-lg"
-                          src={AppImages.categories.ins1}
-                        />
-                      </figure>
-                      <div className="ml-3">
-                        <div className="flex items-center ">
-                          <h6 className="pl-1 text-base font-medium text-gray-600">
-                            <span className="text-lg md:text-xl lg:text-xl text-red-500 font-bold">
-                              10%
-                            </span>{" "}
-                            Off
-                          </h6>
-                          <div className="ml-2">
-                            <span className="text-green-600 inline-block px-4 py-1 rounded-full font-medium text-xs bg-green-100">
-                              Active
-                            </span>
-                          </div>
-                        </div>
-                        <h2 className="pl-1  text-base text-gray-700 leading-6 font-semibold mb-2">
-                          Summer Gift Voucher
-                        </h2>
-                        <span className="inline-block mb-2">
-                          <div className="flex items-center font-semibold">
-                            {["00", "00", "00", "00"].map((item, index) => (
-                              <span
-                                key={index}
-                                className="flex items-center justify-center bg-green-500 text-white text-sm  font-semibold mx-1 px-2 py-1 rounded"
-                              >
-                                {item}
-                              </span>
-                            ))}
-                          </div>
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="md:border-l-2 lg:border-l-2 border-dashed border-[#E2E8F0] lg:w-1/3 md:w-1/3 relative px-4">
-                      <div className="info flex items-center">
-                        <div className="w-full">
-                          <div className="block">
-                            <div className=" border border-dashed bg-emerald-50 py-1 border-emerald-300 rounded-lg text-center block">
-                              <button className="block w-full cursor-pointer">
-                                <span className="uppercase  font-semibold text-sm leading-7 text-emerald-600">
-                                  SUMMER24
-                                </span>
-                              </button>
-                            </div>
-                          </div>
-                          <p
-                            className="leading-4 text-gray-500 mt-2"
-                            style={{ fontSize: "12px", lineHeight: "20px" }}
-                          >
-                            * This coupon apply when shopping more than{" "}
-                            <span className="font-bold">$1000</span>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  {COUPONS.map((coupon, idx) => (
+                    <CouponCard
+                      key={idx}
+                      image={coupon.image}
+                      title={coupon.title}
+                      discount={coupon.discount}
+                      status={statuses[coupon.id] || coupon.status}
+                      couponCode={coupon.couponCode}
+                      copied={copiedIndex === idx}
+                      timeLeft={
+                        timers[coupon.id] || {
+                          days: "00",
+                          hours: "00",
+                          minutes: "00",
+                          seconds: "00",
+                        }
+                      }
+                      minAmount={2000} 
+                      onCopy={() => handleCopy(idx, coupon.couponCode)}
+                    />
+                  ))}
                 </div>
               </div>
             </div>

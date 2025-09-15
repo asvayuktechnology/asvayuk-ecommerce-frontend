@@ -336,7 +336,7 @@ const Header: React.FC = () => {
 
                 {isOpen && (
                   <div
-                    className="absolute right-0 z-10 mt-2.5 w-60 rounded-md bg-white py-2 shadow-lg "
+                    className="absolute right-0 z-10 mt-2.5 w-60 origin-top-right rounded-md bg-white py-2 shadow-lg"
                     role="menu"
                   >
                     {[
@@ -364,9 +364,9 @@ const Header: React.FC = () => {
                       <Link
                         key={href}
                         href={href}
-                        className="flex items-center px-6 py-1 text-sm leading-6 hover:text-teal-600"
+                        className="w-full flex items-center px-6 py-2 hover:bg-gray-50 hover:text-teal-600"
                       >
-                        <Icon className="h-4 w-4 mr-3" />
+                        <Icon className="text-[1rem] mr-3" />
                         {label}
                       </Link>
                     ))}
