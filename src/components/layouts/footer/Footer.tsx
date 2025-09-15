@@ -255,7 +255,7 @@ const Footer: React.FC = () => {
 
                 {/* <hr className="hr-line border-slate-200" /> */}
 
-                <div className="mx-auto max-w-screen-2xl px-4 sm:px-10 bg-gray-50 border border-gray-50 rounded-lg">
+                <div className="mx-auto max-w-screen-2xl px-4 sm:px-10 bg-gray-50 shadow-sm border border-gray-50 rounded-lg">
                     <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-5 sm:gap-9 lg:gap-11 xl:gap-7 py-8 items-center justify-between">
                         <div className="col-span-1">
                             <div>
@@ -295,8 +295,8 @@ const Footer: React.FC = () => {
 
                         <div className="col-span-1 text-center hidden md:block lg:block">
                             <div>
-                                <p className="text-base leading-7 font-medium block text-black">
-                                    Call Us Today!
+                                <p className="leading-7 font-bold block text-black">
+                                    Call Us
                                 </p>
                                 <h5 className="text-2xl font-bold text-emerald-500 leading-7">
                                     <Link href="tel:7854215478">

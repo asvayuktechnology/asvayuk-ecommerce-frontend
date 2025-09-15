@@ -5,7 +5,6 @@ import ProductCard from "@/components/products/productsInfo/ProductCard";
 import ProductModalCard from "@/components/products/productsInfo/ProductModalCard";
 import FilterSidebar from "@/components/products/Filters/FilterSidebar";
 
-// ✅ Define a type for Product
 interface Product {
   id: number;
   title: string;
@@ -20,7 +19,6 @@ interface Product {
   };
 }
 
-// ✅ Define a type for filters
 interface Filters {
   categoryFilter: string[];
   brandFilter: string[];

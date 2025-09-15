@@ -8,6 +8,7 @@ import ProductCard from "@/components/products/productsInfo/ProductCard";
 import BannerCarousel from "@/components/ui/common/carousel/BannerCarousel";
 import AppImages from "@/config/constant/app.images";
 import { getProducts } from "@/services/productService";
+import FeaturedCategories from "./FeaturedCategories";
 
 interface Product {
   id: number;
@@ -195,7 +196,7 @@ const Home: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-orange-100 px-10 py-6 rounded-lg mt-6">
+          <div className="bg-[#FFEDD4] px-10 py-6 rounded-lg mt-6">
             <div className="lg:flex lg:justify-between lg:items-center">
               <div className="mb-4 lg:mb-0">
                 <h1 className=" text-xl">
@@ -217,6 +218,8 @@ const Home: React.FC = () => {
             </div>
           </div>
         </div>
+
+        <FeaturedCategories />
 
         <ProductModalCard
           isOpen={isModalOpen}
@@ -257,42 +260,44 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        <div className="block mx-auto max-w-screen-2xl">
-          <div className="mx-auto max-w-screen-2xl px-4 sm:px-10">
-            <div className="lg:p-16 p-6 bg-emerald-500 shadow-sm rounded-lg">
-              <div className="w-full bg-white shadow-sm lg:px-10 lg:py-5 p-6 rounded-lg">
-                <div className="flex justify-between items-center">
-                  {/* Text Section */}
-                  <div className="lg:w-3/5">
-                    <span className="text-base lg:text-lg text-black">
-                      Organic Products and Food
-                    </span>
-                    <h2 className=" text-lg lg:text-2xl font-bold mb-1 text-black">
-                      Quick Delivery to Your Home
-                    </h2>
-                    <p className="text-sm font-sans leading-6 text-black">
-                      There are many products you will find in our shop. Choose
-                      your daily necessary product from our KachaBazar shop and
-                      get some special offers. See our latest discounted
-                      products and enjoy a special discount.
-                    </p>
-                    <Link
-                      href="/#"
-                      className="lg:w-1/3 text-xs  font-medium inline-block mt-5 px-8 py-3 bg-emerald-500 text-center text-white rounded-full hover:text-white"
-                    >
-                      Download App
-                    </Link>
-                  </div>
+        <div className="bg-gray-50 py-15">
+          <div className=" block mx-auto max-w-screen-2xl">
+            <div className="mx-auto max-w-screen-2xl px-4 sm:px-10">
+              <div className="lg:p-16 p-6 bg-emerald-500 shadow-sm rounded-lg">
+                <div className="w-full bg-white shadow-sm lg:px-10 lg:py-5 p-6 rounded-lg">
+                  <div className="flex justify-between items-center">
+                    {/* Text Section */}
+                    <div className="lg:w-3/5">
+                      <span className="text-base lg:text-lg text-black">
+                        Organic Products and Food
+                      </span>
+                      <h2 className=" text-lg lg:text-2xl font-bold mb-1 text-black">
+                        Quick Delivery to Your Home
+                      </h2>
+                      <p className="text-sm font-sans leading-6 text-black">
+                        There are many products you will find in our shop.
+                        Choose your daily necessary product from our KachaBazar
+                        shop and get some special offers. See our latest
+                        discounted products and enjoy a special discount.
+                      </p>
+                      <Link
+                        href="/#"
+                        className="lg:w-1/3 text-xs  font-medium inline-block mt-5 px-8 py-3 bg-emerald-500 text-center text-white rounded-full hover:text-white"
+                      >
+                        Download App
+                      </Link>
+                    </div>
 
-                  {/* Image Section */}
-                  <div className="w-1/5 flex-grow hidden md:flex lg:justify-end">
-                    <Image
-                      src={deliveryBoy}
-                      alt="Quick Delivery to Your Home"
-                      width={373}
-                      height={250}
-                      className="block w-auto object-contain"
-                    />
+                    {/* Image Section */}
+                    <div className="w-1/5 flex-grow hidden md:flex lg:justify-end">
+                      <Image
+                        src={deliveryBoy}
+                        alt="Quick Delivery to Your Home"
+                        width={373}
+                        height={250}
+                        className="block w-auto object-contain"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>

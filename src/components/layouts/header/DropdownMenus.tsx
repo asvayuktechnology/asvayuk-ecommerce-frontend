@@ -54,7 +54,7 @@ const DropdownMenus: React.FC<DropdownMenusProps> = ({ categories, menuTitle }) 
 
       {isOpen && (
         <div className="absolute z-10 -ml-1 mt-1 transform w-screen max-w-xs c-h-65vh bg-white">
-          <div className="rounded-md shadow-lg ring-1 ring-opacity-5 overflow-y-scroll flex-grow scrollbar-hide w-full h-full">
+          <div className="rounded-md shadow-lg  overflow-y-scroll flex-grow scrollbar-hide w-full h-full">
             <div className="flex flex-col w-full h-full bg-white cursor-pointer scrollbar-hide">
               <div className="w-full max-h-full">
                 <div className="relative grid gap-2 p-6">
@@ -63,7 +63,7 @@ const DropdownMenus: React.FC<DropdownMenusProps> = ({ categories, menuTitle }) 
                       key={index}
                       role="button"
                       href={`/${category.title.toLowerCase().replace(/[\s&]+/g, "-")}`}
-                      className="p-2 flex items-center rounded-md hover:bg-gray-50 w-full hover:text-emerald-600"
+                      className="p-2 flex items-center rounded-md hover:bg-gray-50 w-full"
                     >
                       <Image
                         alt={category.title}
@@ -72,9 +72,9 @@ const DropdownMenus: React.FC<DropdownMenusProps> = ({ categories, menuTitle }) 
                         height={18}
                         className="object-contain"
                       />
-                      <div className="inline-flex items-center justify-between ml-3 text-sm font-medium w-full text-black">
+                      <div className="flex justify-between ml-3 text-sm font-medium flex-1 cursor-pointer hover:text-emerald-600">
                         {category.title}
-                        <span className="transition duration-700 ease-in-out inline-flex items-end text-gray-400">
+                        <span className="cursor-pointer text-gray-400 hover:text-emerald-600">
                           <FaAngleRight />
                         </span>
                       </div>
