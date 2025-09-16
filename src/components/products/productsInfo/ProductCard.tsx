@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { MouseEventHandler } from "react";
 import { FaPlus } from "react-icons/fa6";
-import { FiEye, FiShoppingCart } from "react-icons/fi";
+import { FiEye } from "react-icons/fi";
 
 interface ProductCardProps {
   title: string;

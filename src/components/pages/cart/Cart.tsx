@@ -1,6 +1,6 @@
 "use client";
 
-import { Drawer, DrawerHeader, DrawerItems } from "flowbite-react";
+import { Drawer, DrawerItems } from "flowbite-react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart } from "@/store/slice/cartSlice";
 import QuantityCounter from "@/components/products/quantityCounter/QuantityCounter";

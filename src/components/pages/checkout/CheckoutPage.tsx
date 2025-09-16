@@ -1,10 +1,6 @@
 "use client";
-
-import CustomInput from "@/components/ui/common/inputs/CustomInput";
 import React from "react";
-import { FaUser, FaEnvelope, FaPhone } from "react-icons/fa";
 import OrderSummary from "./OrderSummary";
-import Link from "next/link";
 import CheckoutForm from "./CheckoutForm";
 
 export default function CheckoutPage() {

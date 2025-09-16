@@ -74,7 +74,7 @@ const CouponCard: React.FC<CouponCardProps> = ({
               <div className="flex items-center font-semibold">
                 {Object.values(timeLeft).map((unit, idx) => (
                   <span
-                    key={idx} 
+                    key={idx}
                     className={`${timerBg} flex items-center justify-center dark:text-zinc-900  text-sm  font-semibold px-2 py-1 rounded mx-1`}
                   >
                     {unit}

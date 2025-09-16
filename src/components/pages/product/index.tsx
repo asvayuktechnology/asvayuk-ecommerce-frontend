@@ -4,6 +4,7 @@ import { getProducts } from "@/services/productService";
 import ProductCard from "@/components/products/productsInfo/ProductCard";
 import ProductModalCard from "@/components/products/productsInfo/ProductModalCard";
 import FilterSidebar from "@/components/products/Filters/FilterSidebar";
+import FullPageLoader from "@/components/ui/common/loader/FullPageLoader";
 
 interface Product {
   id: number;
@@ -104,7 +105,9 @@ export default function ProductPage() {
 
   if (loading)
     return (
-      <p className="p-10 text-center text-gray-500">Loading products...</p>
+      <p className="p-10 text-center text-gray-500">
+        <FullPageLoader />
+      </p>
     );
 
   const categories = [...new Set(data.map((p) => p.category))];

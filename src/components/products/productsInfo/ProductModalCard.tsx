@@ -41,7 +41,6 @@ const ProductModalCard: React.FC<ProductModalCardProps> = ({
     dispatch(addToCart({ ...product, quantity }));
     setQuantity(1);
     onClose();
-    console.log("Product add Successful");
   };
 
   return (

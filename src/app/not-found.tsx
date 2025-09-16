@@ -22,7 +22,7 @@ export default function NotFound() {
             {/* Content */}
             <div className="">
               <h3 className="text-2xl sm:text-3xl md:text-4xl mb-3 sm:mb-4">
-                Looks like you're lost
+                Looks like you&#39;re lost
               </h3>
               <p className="text-base sm:text-lg mb-5 sm:mb-6">
                 The page you are looking for is not available!

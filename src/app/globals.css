@@ -120,3 +120,17 @@ p {
     rgba(248, 237, 236, 1) 95%
   );
 }
+
+/* Loader bounce */
+@keyframes bounce-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15%);
+  }
+}
+.animate-bounce-slow {
+  animation: bounce-slow 1s ease-in-out infinite;
+}

@@ -10,6 +10,7 @@ import AppImages from "@/config/constant/app.images";
 import { getProducts } from "@/services/productService";
 import FeaturedCategories from "./FeaturedCategories";
 import CouponCard from "@/components/products/couponCard/CouponCard";
+import FullPageLoader from "@/components/ui/common/loader/FullPageLoader";
 
 interface Product {
   id: number;
@@ -59,6 +60,7 @@ const COUPONS: Coupon[] = [
 
 const Home: React.FC = () => {
   const [data, setData] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
@@ -72,8 +74,11 @@ const Home: React.FC = () => {
       try {
         const data: Product[] = await getProducts();
         setData(data);
+        setLoading(true);
       } catch (error) {
         console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -165,7 +170,7 @@ const Home: React.FC = () => {
                           seconds: "00",
                         }
                       }
-                      minAmount={2000} 
+                      minAmount={2000}
                       onCopy={() => handleCopy(idx, coupon.couponCode)}
                     />
                   ))}
@@ -221,18 +226,22 @@ const Home: React.FC = () => {
             </div>
             <div className="flex">
               <div className="w-full">
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 2xl:grid-cols-6 gap-2 md:gap-3 lg:gap-3">
-                  {data.map((item) => (
-                    <ProductCard
-                      key={item.id}
-                      title={item.title}
-                      price={item.price}
-                      stock={item.rating.count}
-                      imageUrl={item.image}
-                      onClick={() => openProductModal(item)}
-                    />
-                  ))}
-                </div>
+                {loading ? (
+                  <FullPageLoader />
+                ) : (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 2xl:grid-cols-6 gap-2 md:gap-3 lg:gap-3">
+                    {data.map((item) => (
+                      <ProductCard
+                        key={item.id}
+                        title={item.title}
+                        price={item.price}
+                        stock={item.rating.count}
+                        imageUrl={item.image}
+                        onClick={() => openProductModal(item)}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -300,18 +309,22 @@ const Home: React.FC = () => {
 
             <div className="flex">
               <div className="w-full">
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 2xl:grid-cols-6 gap-2 md:gap-3 lg:gap-3">
-                  {data.map((item) => (
-                    <ProductCard
-                      key={item.id}
-                      title={item.title}
-                      price={item.price}
-                      stock={item.rating.count}
-                      imageUrl={item.image}
-                      onClick={() => openProductModal(item)}
-                    />
-                  ))}
-                </div>
+                {loading ? (
+                  <FullPageLoader />
+                ) : (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 2xl:grid-cols-6 gap-2 md:gap-3 lg:gap-3">
+                    {data.map((item) => (
+                      <ProductCard
+                        key={item.id}
+                        title={item.title}
+                        price={item.price}
+                        stock={item.rating.count}
+                        imageUrl={item.image}
+                        onClick={() => openProductModal(item)}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import Orderstable from "@/components/user/dashboard/Orderstable";
 // import OrderCard from "@/components/user/dashboard/OrderCard";
-import Pagination from "@/components/ui/common/pagination/Pagination";
+// import Pagination from "@/components/ui/common/pagination/Pagination";
 
 const page = () => {
   return (
