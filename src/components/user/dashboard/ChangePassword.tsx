@@ -1,63 +1,91 @@
 "use client";
+
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import CustomInput from "@/components/ui/common/inputs/CustomInput";
+import { FaEnvelope, FaLock } from "react-icons/fa";
+import { changePasswordSchema } from "@/schemas/changePasswordSchemas/changePasswordSchemas";
+
 const ChangePassword = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(changePasswordSchema),
+    defaultValues: {
+      email: "justin@gmail.com",
+    },
+  });
+
+  const onSubmit = (data) => {
+    console.log("Change Password Data:", data);
+    alert(JSON.stringify(data));
+  };
+
   return (
-    <>
-      <form>
-        <div className="bg-white">
-          <div className="md:grid md:grid-cols-1">
-            {/* Email Field */}
-            <div className="md:col-span-2 lg:mt-6 col-span-6 sm:col-span-6">
-              <label className="block text-gray-700 font-medium text-sm mb-2">
-                Email Address
-              </label>
-              <input
-                type="email"
-                value="justin@gmail.com"
-                readOnly
-                placeholder="Email Address"
-                className="w-full rounded-md border border-gray-300 bg-gray-100 px-4 py-2 text-gray-500 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
-              />
-            </div>
-
-            {/* Current Password */}
-            <div className="col-span-6 sm:col-span-6 mt-4">
-              <label className="block text-gray-700 font-medium text-sm mb-2">
-                Current Password
-              </label>
-              <input
-                type="password"
-                placeholder="Current Password"
-                className="w-full rounded-md border border-gray-300 px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
-                autoComplete="current-password"
-              />
-            </div>
-
-            {/* New Password */}
-            <div className="col-span-6 sm:col-span-6 mt-4">
-              <label className="block text-gray-700 font-medium text-sm mb-2">
-                New Password
-              </label>
-              <input
-                type="password"
-                placeholder="New Password"
-                className="w-full rounded-md border border-gray-300 px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
-                autoComplete="new-password"
-              />
-            </div>
-          </div>
-
-          {/* Submit Button */}
-          <div className="mt-5 text-right">
-            <button
-              type="submit"
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-teal-500 px-4 py-2 text-sm font-medium text-white hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500"
-            >
-              Change Password
-            </button>
-          </div>
+    <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-4 rounded-md">
+      <div className="md:grid md:grid-cols-1">
+        {/* Email (read-only) */}
+        <div className="mb-4">
+          <CustomInput
+            label="Email Address"
+            type="email"
+            readOnly
+            icon={<FaEnvelope className="text-gray-400" />}
+            className="bg-gray-100 text-gray-500"
+            {...register("email")}
+          />
+          {errors.email && (
+            <span className="text-red-400 text-sm">{errors.email.message}</span>
+          )}
         </div>
-      </form>
-    </>
+
+        {/* Current Password */}
+        <div className="mb-4">
+          <CustomInput
+            label="Current Password"
+            type="password"
+            placeholder="Enter Current Password"
+            autoComplete="current-password"
+            icon={<FaLock className="text-gray-400" />}
+            {...register("currentPassword")}
+          />
+          {errors.currentPassword && (
+            <span className="text-red-400 text-sm">
+              {errors.currentPassword.message}
+            </span>
+          )}
+        </div>
+
+        {/* New Password */}
+        <div className="mb-4">
+          <CustomInput
+            label="New Password"
+            type="password"
+            placeholder="Enter New Password"
+            autoComplete="new-password"
+            icon={<FaLock className="text-gray-400" />}
+            {...register("newPassword")}
+          />
+          {errors.newPassword && (
+            <span className="text-red-400 text-sm">
+              {errors.newPassword.message}
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* Submit Button */}
+      <div className="mt-5 text-right">
+        <button
+          type="submit"
+          className="bg-emerald-500 text-white px-6 py-2 rounded-md font-semibold hover:bg-emerald-600 transition cursor-pointer"
+        >
+          Change Password
+        </button>
+      </div>
+    </form>
   );
 };
 

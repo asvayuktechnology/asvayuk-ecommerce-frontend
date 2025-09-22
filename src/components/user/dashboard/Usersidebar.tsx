@@ -4,14 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { 
-  FiHome, 
-  FiShoppingCart, 
-  FiStar, 
-  FiUser, 
-  FiEdit, 
-  FiLock, 
-  FiLogOut 
+import {
+  FiHome,
+  FiShoppingCart,
+  // FiStar,
+  FiUser,
+  FiEdit,
+  FiLock,
+  FiLogOut,
 } from "react-icons/fi";
 
 const Usersidebar: React.FC = () => {
@@ -21,7 +21,7 @@ const Usersidebar: React.FC = () => {
   const links = [
     { href: "/user/dashboard", label: "Dashboard", icon: FiHome },
     { href: "/user/my-orders", label: "My Orders", icon: FiShoppingCart },
-    { href: "/user/my-reviews", label: "My Review", icon: FiStar },
+    // { href: "/user/my-reviews", label: "My Review", icon: FiStar },
     { href: "/user/my-account", label: "My Account", icon: FiUser },
     { href: "/user/update-profile", label: "Update Profile", icon: FiEdit },
     { href: "/user/change-password", label: "Change Password", icon: FiLock },
@@ -57,7 +57,12 @@ const Usersidebar: React.FC = () => {
             viewBox="0 0 24 24"
             stroke="currentColor"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 9l6 6 6-6" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 9l6 6 6-6"
+            />
           </svg>
         </button>
       </div>
@@ -101,10 +106,13 @@ const Usersidebar: React.FC = () => {
           ))}
 
           {/* Logout */}
-          <button className="flex items-center w-full p-2 rounded-md hover:bg-gray-50 text-gray-600 text-sm font-medium mt-2">
+          <Link
+            href="/"
+            className="cursor-pointer flex items-center w-full p-2 rounded-md hover:bg-gray-50 text-gray-600 text-sm font-medium mt-2"
+          >
             <FiLogOut className="w-4 h-4 mr-2" />
-            Logout
-          </button>
+            <span>Logout</span>
+          </Link>
         </div>
       </div>
     </div>
@@ -118,7 +126,12 @@ interface SidebarLinkProps {
   active?: boolean;
 }
 
-const SidebarLink: React.FC<SidebarLinkProps> = ({ href, label, Icon, active }) => {
+const SidebarLink: React.FC<SidebarLinkProps> = ({
+  href,
+  label,
+  Icon,
+  active,
+}) => {
   return (
     <Link
       href={href}
