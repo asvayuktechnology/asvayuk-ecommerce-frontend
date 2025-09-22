@@ -80,7 +80,7 @@ const ProductModalCard: React.FC<ProductModalCardProps> = ({
                   {product.rating?.count || 0}
                 </span>
               </span>
-              <h2 className="text-lg md:text-xl lg:text-xl font-medium mt-1 hover:text-black">
+              <h2 className="text-lg md:text-xl lg:text-xl font-medium mt-1 hover:text-black line-clamp-1">
                 {product.title}
               </h2>
             </div>
@@ -95,7 +95,7 @@ const ProductModalCard: React.FC<ProductModalCardProps> = ({
             </div>
 
             {/* Description */}
-            <p className="text-sm leading-6 text-gray-500">
+            <p className="text-sm leading-6 text-gray-500 line-clamp-3">
               {product.description}
             </p>
 

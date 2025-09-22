@@ -6,8 +6,8 @@ import { removeFromCart } from "@/store/slice/cartSlice";
 import QuantityCounter from "@/components/products/quantityCounter/QuantityCounter";
 import Image from "next/image";
 import Link from "next/link";
-import { RootState } from "@/store"; // adjust the path if needed
 import noresult from "../../../../public/images/no-result.svg";
+import { RootState } from "@reduxjs/toolkit/query";
 
 interface CartItem {
   id: number | string;

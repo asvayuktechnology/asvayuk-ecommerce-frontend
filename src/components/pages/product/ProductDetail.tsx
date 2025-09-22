@@ -152,12 +152,14 @@ export default function ProductDetail() {
                   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 2xl:grid-cols-6 gap-2 md:gap-3 lg:gap-3">
                     {data.map((item) => (
                       <ProductCard
-                        id={item.id}
                         key={item.id}
+                        id={item.id}
                         title={item.title}
                         price={item.price}
-                        stock={item.rating.count}
+                        stock={item.rating?.count || 0} // use rating count as stock
                         imageUrl={item.image}
+                        rating={item.rating?.rate || 0} // pass rate as rating
+                        reviews={item.rating?.count || 0} // pass count as reviews
                         onClick={() => openProductModal(item)}
                       />
                     ))}

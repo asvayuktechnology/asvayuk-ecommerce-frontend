@@ -5,6 +5,9 @@ import ProductCard from "@/components/products/productsInfo/ProductCard";
 import ProductModalCard from "@/components/products/productsInfo/ProductModalCard";
 import FilterSidebar from "@/components/products/Filters/FilterSidebar";
 import FullPageLoader from "@/components/ui/common/loader/FullPageLoader";
+import Link from "next/link";
+import Image from "next/image";
+import noresult from "../../../../public/images/no-result.svg";
 
 interface Product {
   id: number;
@@ -103,16 +106,12 @@ export default function ProductPage() {
     setFilteredData(filtered);
   }, [filters, data]);
 
-  if (loading)
-    return (
-      <p className="p-10 text-center text-gray-500">
-        <FullPageLoader />
-      </p>
-    );
+  if (loading) return <FullPageLoader />;
 
   const categories = [...new Set(data.map((p) => p.category))];
   const brands = [...new Set(data.map((p) => p.brand || "Generic"))];
   const colors = [...new Set(data.map((p) => p.color || "Unknown"))];
+
   return (
     <>
       <ProductModalCard
@@ -120,18 +119,31 @@ export default function ProductPage() {
         onClose={() => setIsModalOpen(false)}
         product={selectedProduct}
       />
-      <div className="bg-gray-50">
-        <div className="lg:py-16 py-10 mx-auto max-w-screen-2xl px-3 sm:px-10">
-          <div className="mb-10 flex justify-center">
-            <div className="text-center w-full lg:w-2/5">
-              <h2 className="text-xl lg:text-4xl mb-2 font-semibold text-black">
-                Our Products
-              </h2>
-              <p className="text-base font-sans text-gray-600 leading-6 pb-5">
-                Browse our products with modern filters to quickly find what you
-                need.
-              </p>
-            </div>
+
+      <div className="px-3 sm:px-10 mx-auto max-w-screen-2xl mt-10 hidden md:block">
+        {/* Hero Section */}
+        <div className="relative bg-gradient-to-r from-black via-gray-900 to-green-700 rounded-2xl text-white mb-12 shadow-xl overflow-hidden p-10">
+          <h1 className="text-4xl font-bold mb-4">
+            🛍️ Discover Our Collection
+          </h1>
+          <p className="text-lg max-w-2xl mb-6">
+            Explore the best hand-picked products crafted with quality and care.
+            Shop confidently and find something unique just for you!
+          </p>
+          <Link href="/categories">
+            <button className="px-6 py-3 bg-white text-black font-semibold rounded-xl shadow hover:bg-gray-100 transition">
+              Start Shopping
+            </button>
+          </Link>
+          <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
+        </div>
+      </div>
+
+      {/* Products Section */}
+      <div className="bg-gray-50 py-10 lg:py-16">
+        <div className="mx-auto max-w-screen-2xl px-3 sm:px-10">
+          <div className="flex items-center justify-between flex-wrap gap-4 mb-10">
+            <h2 className="text-2xl font-semibold">All Products</h2>
           </div>
 
           <div className="flex flex-col lg:flex-row gap-6">
@@ -144,23 +156,41 @@ export default function ProductPage() {
               setFilters={setFilters}
             />
 
-            {/* Products Grid */}
-            <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
-              {filteredData.map((item) => (
-                <ProductCard
-                  id={item.id}
-                  key={item.id}
-                  title={item.title}
-                  price={item.price}
-                  stock={item.rating.count}
-                  imageUrl={item.image}
-                  onClick={() => openProductModal(item)}
-                />
-              ))}
-              {filteredData.length === 0 && (
-                <p className="col-span-full text-center text-gray-500 mt-5">
-                  No products match the selected filters.
-                </p>
+            {/* Products Grid or No Results */}
+            <div className="flex-1">
+              {filteredData.length > 0 ? (
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
+                  {filteredData.map((item) => (
+                    <ProductCard
+                      key={item.id}
+                      id={item.id}
+                      title={item.title}
+                      price={item.price}
+                      stock={item.rating?.count || 0} // use rating count as stock
+                      imageUrl={item.image}
+                      rating={item.rating?.rate || 0} // pass rate as rating
+                      reviews={item.rating?.count || 0} // pass count as reviews
+                      onClick={() => openProductModal(item)}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className="flex flex-col justify-center items-center text-center py-20">
+                  <Image
+                    src={noresult}
+                    width={250}
+                    height={250}
+                    alt="no items"
+                    className="rounded-md object-cover"
+                  />
+                  <h3 className="font-semibold text-gray-700 text-lg pt-5">
+                    No products found
+                  </h3>
+                  <p className="text-sm text-gray-500 pt-2 px-8">
+                    Sorry, we couldn&#39;t find any products matching your
+                    filters.
+                  </p>
+                </div>
               )}
             </div>
           </div>
