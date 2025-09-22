@@ -148,6 +148,7 @@ export default function ProductPage() {
             <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
               {filteredData.map((item) => (
                 <ProductCard
+                  id={item.id}
                   key={item.id}
                   title={item.title}
                   price={item.price}

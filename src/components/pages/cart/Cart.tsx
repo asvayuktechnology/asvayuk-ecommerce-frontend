@@ -121,10 +121,13 @@ export default function Cart({ isOpen, onClose }: CartProps) {
                     {/* Info */}
                     <div className="flex flex-col w-full overflow-hidden">
                       <Link
+                        passHref
                         href={`/product/${item.id}`}
                         className="truncate text-sm font-medium text-gray-700"
                       >
-                        {item.title}
+                        <button onClick={onClose} className="cursor-pointer">
+                          {item.title}
+                        </button>
                       </Link>
                       <span className="text-xs text-gray-400 mb-1">
                         Item Price ${item.price}
@@ -138,7 +141,7 @@ export default function Cart({ isOpen, onClose }: CartProps) {
                         <button
                           onClick={() => handleRemove(item.id)}
                           title="Remove"
-                          className="text-red-400 hover:text-red-600 text-lg"
+                          className="text-red-400 hover:text-red-600 text-lg cursor-pointer"
                         >
                           <svg
                             stroke="currentColor"
@@ -176,18 +179,21 @@ export default function Cart({ isOpen, onClose }: CartProps) {
               </span>
               <span>${cartTotal.toFixed(2)}</span>
             </p>
-            <div className="flex space-x-3 mt-5">
+            <div className="flex justify-between mt-5 gap-1.5">
               <Link
                 href="/checkout-cart"
-                className="flex-1 inline-flex items-center justify-center py-2 px-3 text-sm sm:text-base font-medium rounded-md border border-slate-200 bg-white text-slate-700 hover:bg-gray-100"
+                passHref
+                className="w-[100%] py-2 px-3 text-sm sm:text-base font-medium rounded-md border border-slate-200 bg-white text-slate-700 hover:bg-gray-100 text-center cursor-pointer"
               >
-                View Cart
+                <button onClick={onClose}>View Cart</button>
               </Link>
+
               <Link
                 href="/checkout"
-                className="flex-1 inline-flex items-center justify-center py-2 px-3 text-sm sm:text-base font-medium rounded-md border border-emerald-500 bg-emerald-500 text-white hover:bg-emerald-600"
+                passHref
+                className="w-[100%] py-2 px-3 text-sm sm:text-base font-medium rounded-md border border-emerald-500 bg-emerald-500 text-white hover:bg-emerald-600 text-center cursor-pointer"
               >
-                Checkout
+                <button onClick={onClose}>Checkout</button>
               </Link>
             </div>
           </div>

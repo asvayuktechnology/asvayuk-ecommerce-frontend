@@ -62,17 +62,17 @@ const ProductModalCard: React.FC<ProductModalCardProps> = ({
             {/* Details Section */}
             <div className="md:w-2/3 w-full md:pr-6">
               <div className="mb-6">
-                <h1 className="leading-7 text-lg md:text-xl lg:text-2xl mb-1 font-semibold font-serif text-gray-800">
+                <h1 className="leading-7 text-lg md:text-xl lg:text-2xl mb-1 font-semibold text-gray-800">
                   {product.title}
                 </h1>
-                <p className="uppercase font-serif font-medium text-gray-500 text-sm">
+                <p className="uppercase font-medium text-gray-500 text-sm">
                   SKU :{" "}
                   <span className="font-bold text-gray-600">
                     {product.rating?.count}
                   </span>
                 </p>
                 <div className="relative">
-                  <span className="bg-green-100 text-green-500 rounded-full inline-flex items-center justify-center px-2 py-0 text-xs font-semibold font-serif">
+                  <span className="bg-green-100 text-green-500 rounded-full inline-flex items-center justify-center px-2 py-0 text-xs font-semibold">
                     Stock :
                     <span className="text-orange-700 pl-1 font-bold">5472</span>
                   </span>
@@ -80,7 +80,7 @@ const ProductModalCard: React.FC<ProductModalCardProps> = ({
               </div>
 
               {/* Price */}
-              <div className="font-serif font-bold text-2xl text-black">
+              <div className="font-bold text-2xl text-black">
                 {product.price}
                 <del className="text-lg font-normal text-gray-400 ml-1">
                   {(product.price - product.price * 0.1).toFixed(2)}
@@ -111,19 +111,19 @@ const ProductModalCard: React.FC<ProductModalCardProps> = ({
 
               {/* Tags */}
               <div className="flex flex-col mt-4">
-                <span className="font-serif font-semibold py-1 text-sm">
+                <span className="font-semibold py-1 text-sm">
                   <span className="text-gray-800">Category:</span>
                   <Link href="/">
-                    <button className="text-gray-600 font-serif font-medium underline ml-2 hover:text-teal-600">
+                    <button className="text-gray-600 font-medium underline ml-2 hover:text-teal-600">
                       {product.category}
                     </button>
                   </Link>
                 </span>
                 <div className="flex flex-row">
-                  <span className="bg-gray-50 mr-2 text-gray-600 rounded-full px-3 py-1 text-xs font-semibold font-serif mt-2">
+                  <span className="bg-gray-50 mr-2 text-gray-600 rounded-full px-3 py-1 text-xs font-semibold mt-2">
                     category
                   </span>
-                  <span className="bg-gray-50 mr-2 text-gray-600 rounded-full px-3 py-1 text-xs font-semibold font-serif mt-2">
+                  <span className="bg-gray-50 mr-2 text-gray-600 rounded-full px-3 py-1 text-xs font-semibold mt-2">
                     baby accessories
                   </span>
                 </div>

@@ -36,8 +36,16 @@ const categories: Category[] = [
   { name: "Men Perfumes", image: AppImages.categories.manPerfume, href: "/" },
   { name: "Gocha", image: AppImages.categories.placeholder, href: "/" },
   { name: "Fish & Meat", image: AppImages.categories.cat, href: "/" },
-  { name: "Fruits & Vegetable", image: AppImages.categories.cabbage, href: "/" },
-  { name: "Cooking Essentials", image: AppImages.categories.flyingPan, href: "/" },
+  {
+    name: "Fruits & Vegetable",
+    image: AppImages.categories.cabbage,
+    href: "/",
+  },
+  {
+    name: "Cooking Essentials",
+    image: AppImages.categories.flyingPan,
+    href: "/",
+  },
   { name: "Biscuits & Cakes", image: AppImages.categories.bagelMix, href: "/" },
   { name: "Household Tools", image: AppImages.categories.spray, href: "/" },
   { name: "Beauty & Healths", image: AppImages.categories.beauty, href: "/" },
@@ -52,12 +60,27 @@ const pages: Page[] = [
   { href: "/checkout", label: "Checkout", icons: <IoBagCheckOutline /> },
   { href: "/faq", label: "FAQ", icons: <AiOutlineQuestionCircle /> },
   { href: "/about-us", label: "About Us", icons: <FiUsers /> },
-  { href: "/contact-us", label: "Contact Us", icons: <MdOutlinePhoneCallback /> },
-  { href: "/privacy-policy", label: "Privacy Policy", icons: <MdOutlinePrivacyTip /> },
-  { href: "/terms-and-conditions", label: "Terms & Conditions", icons: <FiFileMinus /> },
-  { href: "/404", label: "404 Not Found", icons: <HiOutlineExclamationCircle /> },
+  {
+    href: "/contact-us",
+    label: "Contact Us",
+    icons: <MdOutlinePhoneCallback />,
+  },
+  {
+    href: "/privacy-policy",
+    label: "Privacy Policy",
+    icons: <MdOutlinePrivacyTip />,
+  },
+  {
+    href: "/terms-and-conditions",
+    label: "Terms & Conditions",
+    icons: <FiFileMinus />,
+  },
+  {
+    href: "/404",
+    label: "404 Not Found",
+    icons: <HiOutlineExclamationCircle />,
+  },
 ];
-
 
 export default function CategoryDrawer({ open, onClose }: CategoryDrawerProps) {
   return (

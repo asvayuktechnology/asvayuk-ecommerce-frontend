@@ -390,7 +390,7 @@ const Footer: React.FC = () => {
         >
           <Link
             href="/user/dashboard"
-            className="leading-none font-bold font-serif block"
+            className="leading-none font-bold block"
           >
             J
           </Link>

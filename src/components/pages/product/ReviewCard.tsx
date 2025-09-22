@@ -19,14 +19,14 @@ const ReviewCard: React.FC<ReviewProps> = ({
   images = [],
 }) => {
   return (
-    <div className="flex space-x-4 text-sm text-gray-500 border-b py-6">
+    <div className="flex space-x-4 text-sm text-gray-500 border-b border-[#E5E7EB] py-6">
       <div className="flex-none">
         <Image
           src={avatar}
           alt={name}
           width={42}
           height={42}
-          className="rounded-full"
+          className="rounded-full bg-gray-100 h-12 w-12 p-1"
         />
       </div>
 

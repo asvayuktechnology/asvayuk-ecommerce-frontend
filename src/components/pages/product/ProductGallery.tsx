@@ -16,13 +16,13 @@ export default function ProductGallery({ images }: ProductGalleryProps) {
 
   return (
     <>
-      <div className="overflow-hidden w-full mx-auto">
+      <div className="overflow-hidden w-full mx-auto p-5 bg-gray-100 rounded-lg">
         <Image
           src={selectedImage}
           alt="product"
           width={500}
           height={500}
-          className="aspect-square w-full rounded-lg bg-gray-100 object-cover"
+          className="aspect-square w-full rounded-lg object-contain"
         />
       </div>
 
@@ -31,15 +31,19 @@ export default function ProductGallery({ images }: ProductGalleryProps) {
           <button
             key={idx}
             onClick={() => setSelectedImage(img)}
-            className={`border rounded-md overflow-hidden p-1 transition 
-              ${selectedImage === img ? "border-black" : "border-gray-300 hover:border-black"}`}
+            className={`border rounded-md overflow-hidden p-1 transition cursor-pointer 
+              ${
+                selectedImage === img
+                  ? "border-green-500 border-2"
+                  : "border-gray-300 hover:border-green-500"
+              }`}
           >
             <Image
               src={img}
               alt="product thumbnail"
               width={100}
               height={100}
-              className="w-20 h-20 object-cover"
+              className="w-20 h-20 object-contain"
             />
           </button>
         ))}

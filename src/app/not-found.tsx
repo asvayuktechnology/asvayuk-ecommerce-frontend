@@ -4,7 +4,7 @@ import notFound from "../../public/images/notfound.gif";
 
 export default function NotFound() {
   return (
-    <section className="py-10 bg-white font-serif">
+    <section className="py-10 bg-white">
       <div className="container mx-auto px-4">
         <div className="flex justify-center">
           <div className="w-full md:w-10/12 lg:w-8/12 text-center">

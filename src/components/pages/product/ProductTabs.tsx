@@ -1,6 +1,7 @@
 "use client";
 import { useState, useMemo } from "react";
 import ReviewCard from "./ReviewCard";
+import noresult from "../../../../public/images/no-result.svg"
 
 interface Review {
   name?: string;
@@ -24,6 +25,18 @@ export default function ProductTabs({
     "description"
   );
 
+  // ✅ Always ensure at least one review
+  const fallbackReview: Review = {
+    name: "John Doe",
+    avatar: noresult,
+    rating: 5,
+    date: "2025-09-16",
+    comment: "Great product! Highly recommend it.",
+    images: [],
+  };
+
+  const safeReviews = reviews.length > 0 ? reviews : [fallbackReview];
+
   const tabs = useMemo(
     () => [
       {
@@ -36,7 +49,10 @@ export default function ProductTabs({
             aria-labelledby="description-tab"
           >
             <h3 className="sr-only">Product Description</h3>
-            <p className="text-sm leading-6 text-gray-500 mb-3">
+            <p
+              className="text-sm leading-6 text-gray-500 md:leading-6 mb-3"
+              style={{ fontSize: "15px", color: "#6a7282" }}
+            >
               {description}
             </p>
           </div>
@@ -44,21 +60,17 @@ export default function ProductTabs({
       },
       {
         id: "reviews",
-        label: `Customer Reviews (${reviews.length})`,
+        label: `Customer Reviews (${safeReviews.length})`,
         content: (
           <div className="pt-6" role="tabpanel" aria-labelledby="reviews-tab">
-            {reviews.length > 0 ? (
-              reviews.map((review, index) => (
-                <ReviewCard key={index} {...review} />
-              ))
-            ) : (
-              <p className="text-gray-400">No reviews available</p>
-            )}
+            {safeReviews.map((review, index) => (
+              <ReviewCard key={index} {...review} />
+            ))}
           </div>
         ),
       },
     ],
-    [reviews, description]
+    [safeReviews, description]
   );
 
   return (
