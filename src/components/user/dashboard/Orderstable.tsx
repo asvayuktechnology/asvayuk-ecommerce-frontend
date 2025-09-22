@@ -2,11 +2,20 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import CustomTable from "@/components/ui/common/table/CustomTable";
+import CustomTable, { Column } from "@/components/ui/common/table/CustomTable";
 import Pagination from "@/components/ui/common/pagination/Pagination";
 
-// Data
-const orders = [
+// Order type
+interface Order {
+  id: string;
+  orderTime: string;
+  method: string;
+  status: string;
+  total: number;
+}
+
+// Sample orders
+const orders: Order[] = [
   {
     id: "bf97",
     orderTime: "June 19, 2025",
@@ -80,7 +89,7 @@ const orders = [
 ];
 
 // Table columns
-const columns = [
+const columns: Column<Order>[] = [
   { key: "id", label: "ID" },
   { key: "orderTime", label: "Order Time", align: "center" },
   { key: "method", label: "Method", align: "center" },
@@ -88,7 +97,7 @@ const columns = [
     key: "status",
     label: "Status",
     align: "center",
-    render: (value: string) => (
+    render: (value: Order["status"]) => (
       <span
         className={`text-sm font-medium ${
           value === "Delivered" ? "text-emerald-500" : "text-yellow-500"
@@ -102,7 +111,7 @@ const columns = [
     key: "total",
     label: "Total",
     align: "center",
-    render: (value: number) => (
+    render: (value: Order["total"]) => (
       <span className="text-sm font-bold">{value.toFixed(2)}</span>
     ),
   },
@@ -110,7 +119,7 @@ const columns = [
     key: "action",
     label: "Action",
     align: "right",
-    render: (_: any, row: (typeof orders)[number]) => (
+    render: (_value: unknown, row: Order) => (
       <Link
         className="px-3 py-1 bg-emerald-100 text-xs text-emerald-600 hover:bg-emerald-500 hover:text-white transition-all font-semibold rounded-full"
         href={`/order/${row.id}`}
@@ -121,7 +130,7 @@ const columns = [
   },
 ];
 
-const PAGE_SIZE = 5; // rows per page
+const PAGE_SIZE = 5;
 
 const Orderstable: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);

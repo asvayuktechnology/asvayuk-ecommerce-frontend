@@ -1,7 +1,7 @@
 "use client";
 import { useState, useMemo } from "react";
 import ReviewCard from "./ReviewCard";
-import noresult from "../../../../public/images/no-result.svg"
+import noresult from "../../../../public/images/no-result.svg";
 
 interface Review {
   name?: string;
@@ -25,20 +25,20 @@ export default function ProductTabs({
     "description"
   );
 
-  // ✅ Always ensure at least one review
-  const fallbackReview: Review = {
-    name: "John Doe",
-    avatar: noresult,
-    rating: 5,
-    date: "2025-09-16",
-    comment: "Great product! Highly recommend it.",
-    images: [],
-  };
+  const tabs = useMemo(() => {
+    // Fallback review if no reviews exist
+    const fallbackReview: Review = {
+      name: "John Doe",
+      avatar: noresult,
+      rating: 5,
+      date: "2025-09-16",
+      comment: "Great product! Highly recommend it.",
+      images: [],
+    };
 
-  const safeReviews = reviews.length > 0 ? reviews : [fallbackReview];
+    const safeReviews = reviews.length > 0 ? reviews : [fallbackReview];
 
-  const tabs = useMemo(
-    () => [
+    return [
       {
         id: "description",
         label: "Description",
@@ -69,9 +69,8 @@ export default function ProductTabs({
           </div>
         ),
       },
-    ],
-    [safeReviews, description]
-  );
+    ];
+  }, [reviews, description]);
 
   return (
     <div>

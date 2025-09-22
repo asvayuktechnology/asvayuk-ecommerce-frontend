@@ -1,15 +1,13 @@
 import Image from "next/image";
 import React from "react";
-
 interface ReviewProps {
-  name: string;
-  avatar: string;
-  rating: number;
-  date: string;
-  comment: string;
+  name?: string;
+  avatar?: string;
+  rating?: number;
+  date?: string;
+  comment?: string;
   images?: string[];
 }
-
 const ReviewCard: React.FC<ReviewProps> = ({
   name = "Anonymous",
   avatar = "",

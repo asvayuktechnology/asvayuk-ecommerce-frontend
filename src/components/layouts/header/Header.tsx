@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { FiGrid, FiList, FiLock, FiUser } from "react-icons/fi";
 
 import AppImages from "@/config/constant/app.images";
@@ -35,7 +35,7 @@ const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isCartOpen, setCartOpen] = useState<boolean>(false);
   const [isNotifOpen, setNotifOpen] = useState<boolean>(false);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.cart.items);
 
   const categories: Category[] = [
