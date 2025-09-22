@@ -10,7 +10,6 @@ import {
 } from "react-icons/md";
 import { IoBagCheckOutline } from "react-icons/io5";
 import { FiFileMinus, FiUsers } from "react-icons/fi";
-import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { HiOutlineExclamationCircle } from "react-icons/hi2";
 import Image from "next/image";
 import AppImages from "@/config/constant/app.images";
@@ -58,7 +57,6 @@ const categories: Category[] = [
 const pages: Page[] = [
   { href: "/offer", label: "Offer Page", icons: <MdOutlineLocalOffer /> },
   { href: "/checkout", label: "Checkout", icons: <IoBagCheckOutline /> },
-  { href: "/faq", label: "FAQ", icons: <AiOutlineQuestionCircle /> },
   { href: "/about-us", label: "About Us", icons: <FiUsers /> },
   {
     href: "/contact-us",
@@ -84,57 +82,66 @@ const pages: Page[] = [
 
 export default function CategoryDrawer({ open, onClose }: CategoryDrawerProps) {
   return (
-    <Drawer
-      open={open}
-      onClose={onClose}
-      position="left"
-      className="lg:w-[450px] md:w-[350px] w-[100%] px-0 py-0"
-    >
-      <DrawerHeader
-        title="Categories"
-        className="px-3 bg-white pt-4 text-black"
-      />
+    <>
+      <div className="">
+        <Drawer
+          open={open}
+          onClose={onClose}
+          position="left"
+          className="p-0"
+          style={{ background: "#fff" }}
+        >
+          <DrawerHeader
+            title="Sidebar"
+            className="px-3 bg-white pt-4 text-black"
+          />
 
-      <div className="overflow-y-auto bg-white">
-        {/* Categories */}
-        <div className="border-b px-4 py-2 font-semibold">All Categories</div>
-        <div className="px-4 py-2 space-y-2">
-          {categories.map((categorie, index) => (
-            <Link
-              key={index}
-              href={categorie.href || "#"}
-              className="flex items-center p-2 rounded-md hover:bg-gray-100 cursor-pointer"
-            >
-              <Image
-                src={categorie.image}
-                alt={categorie.name}
-                width={20}
-                height={20}
-                className="rounded-sm"
-              />
-              <span className="ml-3 text-sm font-medium flex-1">
-                {categorie.name}
-              </span>
-              <MdArrowRightAlt />
-            </Link>
-          ))}
-        </div>
+          <div className="overflow-y-auto bg-white">
+            {/* Categories */}
+            <div className="border-b border-gray-200 px-4 py-2 font-semibold">
+              All Categories
+            </div>
+            <div className="px-4 py-2 space-y-2 h-55 overflow-x-auto">
+              {categories.map((categorie, index) => (
+                <Link
+                  key={index}
+                  href={categorie.href || "#"}
+                  className="flex items-center p-1 rounded-md hover:bg-gray-100 cursor-pointer"
+                >
+                  <Image
+                    src={categorie.image}
+                    alt={categorie.name}
+                    width={12}
+                    height={12}
+                    className="rounded-sm"
+                  />
+                  <span className="ml-3 text-[13px] font-normal flex-1">
+                    {categorie.name}
+                  </span>
+                  <MdArrowRightAlt className="text-[13px] font-normal" />
+                </Link>
+              ))}
+            </div>
 
-        {/* Pages */}
-        <div className="border-b px-4 py-2 mt-4 font-semibold">Pages</div>
-        <div className="px-4 py-2 space-y-2">
-          {pages.map((page, index) => (
-            <Link
-              key={index}
-              href={page.href}
-              className="flex items-center gap-2 px-2 py-1 text-sm text-gray-700 rounded hover:bg-gray-100 hover:text-emerald-600"
-            >
-              <div>{page.icons}</div>
-              <div>{page.label}</div>
-            </Link>
-          ))}
-        </div>
+            {/* Pages */}
+            <div className="border-b border-gray-200 px-4 py-2 mt-4 font-semibold">
+              Pages
+            </div>
+            <div className="px-4 py-2 space-y-2">
+              {pages.map((page, index) => (
+                <Link
+                  key={index}
+                  href={page.href}
+                  className="flex items-center gap-2 px-2 py-1 text-sm text-gray-700 rounded hover:bg-gray-100 hover:text-emerald-600"
+                >
+                  <div>{page.icons}</div>
+                  <div>{page.label}</div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </Drawer>
       </div>
-    </Drawer>
+    </>
   );
 }

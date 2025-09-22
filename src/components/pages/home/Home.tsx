@@ -194,7 +194,7 @@ const Home: React.FC = () => {
               </div>
               <Link
                 className="text-sm font-medium px-6 py-2 bg-emerald-500 text-center rounded-full text-white hover:bg-emerald-700"
-                href="/products"
+                href="/product"
               >
                 Shop Now
               </Link>
