@@ -11,17 +11,18 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import contactImg from "../../../../public/images/contact-us.png";
 import CustomInput from "@/components/ui/common/inputs/CustomInput";
 import { contactSchema } from "@/schemas/contactSchemas/contactSchemas";
-
+import z from "zod";
+type contactSchemaData = z.infer<typeof contactSchema>;
 const ContactPage: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<contactSchemaData>({
     resolver: zodResolver(contactSchema),
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: contactSchemaData) => {
     console.log("Contact Data:", data);
     alert(JSON.stringify(data));
   };

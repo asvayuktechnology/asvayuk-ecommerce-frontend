@@ -6,17 +6,19 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import CustomInput from "@/components/ui/common/inputs/CustomInput";
 import { TbMailBitcoin } from "react-icons/tb";
 import { RiLockPasswordLine } from "react-icons/ri";
+import z from "zod";
+type loginSchemaData = z.infer<typeof loginSchema>;
 
 const Loginform = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<loginSchemaData>({
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: loginSchemaData) => {
     console.log("Login Data:", data);
     alert(JSON.stringify(data));
   };
