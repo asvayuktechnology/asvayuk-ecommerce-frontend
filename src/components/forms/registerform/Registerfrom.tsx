@@ -8,6 +8,7 @@ import { LuUserRound } from "react-icons/lu";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { TbMailBitcoin } from "react-icons/tb";
 import CustomInput from "@/components/ui/common/inputs/CustomInput";
+import z from "zod";
 type signupSchemaData = z.infer<typeof signupSchema>;
 
 const Registerfrom = () => {
