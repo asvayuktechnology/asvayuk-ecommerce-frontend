@@ -79,9 +79,9 @@ const Page = () => {
                     className="hidden"
                   />
 
-                  {errors.image && (
+                  {errors.image?.message && (
                     <span className="text-red-400 text-sm">
-                      {errors.image.message}
+                      {String(errors.image.message)}
                     </span>
                   )}
                 </div>
