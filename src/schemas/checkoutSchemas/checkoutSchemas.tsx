@@ -29,7 +29,7 @@ export const checkoutSchema = z.object({
 
   // Payment
   paymentMethod: z.enum(["Cash", "Card", "RazorPay"], {
-    required_error: "Please select a payment method",
+    message: "Please select a payment method", // ✅ use 'message', not 'required_error'
   }),
 });
 
