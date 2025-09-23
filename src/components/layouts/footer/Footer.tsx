@@ -8,7 +8,7 @@ import { JSX, useState } from "react";
 import CategoryDrawer from "../../products/categoryDrawer/CategoryDrawer";
 import AppImages from "@/config/constant/app.images";
 import Cart from "@/components/pages/cart/Cart";
-import { RootState } from "@reduxjs/toolkit/query";
+import { RootState } from "@/store/store";
 
 interface Feature {
   icon: JSX.Element;
@@ -388,10 +388,7 @@ const Footer: React.FC = () => {
           type="button"
           className="text-xl text-white indicator justify-center"
         >
-          <Link
-            href="/user/dashboard"
-            className="leading-none font-bold block"
-          >
+          <Link href="/user/dashboard" className="leading-none font-bold block">
             J
           </Link>
         </button>

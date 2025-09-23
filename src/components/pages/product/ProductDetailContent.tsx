@@ -7,8 +7,14 @@ import { useState, useMemo } from "react";
 import { FaFacebookF, FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 
+// Extend Product type to include optional stock/tags and required description
+export interface ProductWithExtras extends Product {
+  stock?: number;
+  tags?: string[];
+}
+
 interface ProductDetailContentProps {
-  product: Product;
+  product: ProductWithExtras;
 }
 
 export default function ProductDetailContent({
@@ -17,17 +23,17 @@ export default function ProductDetailContent({
   const {
     title = "Default Product",
     stock = 10,
-    rating = { rate: 0, count: 0 },
-    reviews = 0,
+    rating,
     price = 99.99,
     category = "Default Category",
     tags = ["Default", "Category"],
+    description = "No description available", // default if undefined
   } = product;
 
+  const reviews = rating?.count || 0;
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState("Small");
   const [selectedColor, setSelectedColor] = useState("Green");
-
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
@@ -36,7 +42,7 @@ export default function ProductDetailContent({
   };
 
   // Memoized helpers
-  const numericRating = useMemo(() => Number(rating.rate) || 0, [rating]);
+  const numericRating = useMemo(() => Number(rating?.rate || 0), [rating]);
   const numericPrice = useMemo(() => Number(price) || 0, [price]);
 
   // Static data
@@ -47,17 +53,18 @@ export default function ProductDetailContent({
       {
         href: "#",
         label: "Facebook",
-        icon: <FaFacebookF className="size-5" />,
+        icon: <FaFacebookF className="w-5 h-5" />,
       },
       {
         href: "#",
         label: "Instagram",
-        icon: <FaInstagram className="size-6" />,
+        icon: <FaInstagram className="w-5 h-5" />,
       },
-      { href: "#", label: "X", icon: <FaXTwitter className="size-5" /> },
+      { href: "#", label: "X", icon: <FaXTwitter className="w-5 h-5" /> },
     ],
     []
   );
+
   const highlights = useMemo(
     () => [
       {
@@ -315,7 +322,7 @@ export default function ProductDetailContent({
           </Link>
         </span>
         <div className="flex flex-row">
-          {tags.map((tag) => (
+          {tags?.map((tag: string) => (
             <span
               key={tag}
               className="bg-gray-100 px-2 py-1 mr-2 text-gray-500 rounded inline-flex items-center justify-center text-xs mt-2"
@@ -386,7 +393,7 @@ export default function ProductDetailContent({
               <Link
                 href={href}
                 aria-label={`Share on ${label}`}
-                className="flex size-6 items-center justify-center text-gray-400 hover:text-gray-500"
+                className="flex w-6 h-6 items-center justify-center text-gray-400 hover:text-gray-500"
               >
                 {icon}
               </Link>

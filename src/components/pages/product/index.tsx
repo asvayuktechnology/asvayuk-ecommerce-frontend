@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { getProducts } from "@/services/productService";
 import ProductCard from "@/components/products/productsInfo/ProductCard";
@@ -17,13 +18,13 @@ interface Product {
   category: string;
   brand?: string;
   color?: string;
-  rating: {
+  rating?: {
     rate: number;
     count: number;
   };
 }
 
-interface Filters {
+export interface Filters {
   categoryFilter: string[];
   brandFilter: string[];
   colorFilter: string[];
@@ -55,12 +56,17 @@ export default function ProductPage() {
     setIsModalOpen(true);
   };
 
+  // Fetch products
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const products = await getProducts();
-        setData(products);
-        setFilteredData(products);
+        const normalizedProducts = products.map((p) => ({
+          ...p,
+          rating: p.rating || { rate: 0, count: 0 },
+        }));
+        setData(normalizedProducts);
+        setFilteredData(normalizedProducts);
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -70,38 +76,25 @@ export default function ProductPage() {
     fetchProducts();
   }, []);
 
+  // Filter and sort
   useEffect(() => {
     let filtered = [...data];
-    const {
-      categoryFilter,
-      brandFilter,
-      colorFilter,
-      priceRange,
-      minRating,
-      inStockOnly,
-      sortOption,
-    } = filters;
+    const { categoryFilter, brandFilter, colorFilter, priceRange, minRating, inStockOnly, sortOption } = filters;
 
     if (categoryFilter.length > 0)
       filtered = filtered.filter((p) => categoryFilter.includes(p.category));
     if (brandFilter.length > 0)
-      filtered = filtered.filter((p) =>
-        brandFilter.includes(p.brand || "Generic")
-      );
+      filtered = filtered.filter((p) => brandFilter.includes(p.brand || "Generic"));
     if (colorFilter.length > 0)
-      filtered = filtered.filter((p) =>
-        colorFilter.includes(p.color || "Unknown")
-      );
-    filtered = filtered.filter(
-      (p) => p.price >= priceRange[0] && p.price <= priceRange[1]
-    );
-    filtered = filtered.filter((p) => p.rating.rate >= minRating);
-    if (inStockOnly) filtered = filtered.filter((p) => p.rating.count > 0);
+      filtered = filtered.filter((p) => colorFilter.includes(p.color || "Unknown"));
+    
+    filtered = filtered.filter((p) => p.price >= priceRange[0] && p.price <= priceRange[1]);
+    filtered = filtered.filter((p) => (p.rating?.rate ?? 0) >= minRating);
+    if (inStockOnly) filtered = filtered.filter((p) => (p.rating?.count ?? 0) > 0);
 
     if (sortOption === "priceLow") filtered.sort((a, b) => a.price - b.price);
     if (sortOption === "priceHigh") filtered.sort((a, b) => b.price - a.price);
-    if (sortOption === "popular")
-      filtered.sort((a, b) => b.rating.count - a.rating.count);
+    if (sortOption === "popular") filtered.sort((a, b) => (b.rating?.count ?? 0) - (a.rating?.count ?? 0));
 
     setFilteredData(filtered);
   }, [filters, data]);
@@ -120,15 +113,12 @@ export default function ProductPage() {
         product={selectedProduct}
       />
 
+      {/* Hero */}
       <div className="px-3 sm:px-10 mx-auto max-w-screen-2xl mt-10 hidden md:block">
-        {/* Hero Section */}
         <div className="relative bg-gradient-to-r from-black via-gray-900 to-green-700 rounded-2xl text-white mb-12 shadow-xl overflow-hidden p-10">
-          <h1 className="text-4xl font-bold mb-4">
-            🛍️ Discover Our Collection
-          </h1>
+          <h1 className="text-4xl font-bold mb-4">🛍️ Discover Our Collection</h1>
           <p className="text-lg max-w-2xl mb-6">
             Explore the best hand-picked products crafted with quality and care.
-            Shop confidently and find something unique just for you!
           </p>
           <Link href="/categories">
             <button className="px-6 py-3 bg-white text-black font-semibold rounded-xl shadow hover:bg-gray-100 transition">
@@ -156,7 +146,7 @@ export default function ProductPage() {
               setFilters={setFilters}
             />
 
-            {/* Products Grid or No Results */}
+            {/* Products Grid */}
             <div className="flex-1">
               {filteredData.length > 0 ? (
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
@@ -166,29 +156,20 @@ export default function ProductPage() {
                       id={item.id}
                       title={item.title}
                       price={item.price}
-                      stock={item.rating?.count || 0} // use rating count as stock
+                      stock={item.rating?.count ?? 0}
                       imageUrl={item.image}
-                      rating={item.rating?.rate || 0} // pass rate as rating
-                      reviews={item.rating?.count || 0} // pass count as reviews
+                      rating={item.rating?.rate ?? 0}
+                      reviews={item.rating?.count ?? 0}
                       onClick={() => openProductModal(item)}
                     />
                   ))}
                 </div>
               ) : (
                 <div className="flex flex-col justify-center items-center text-center py-20">
-                  <Image
-                    src={noresult}
-                    width={250}
-                    height={250}
-                    alt="no items"
-                    className="rounded-md object-cover"
-                  />
-                  <h3 className="font-semibold text-gray-700 text-lg pt-5">
-                    No products found
-                  </h3>
+                  <Image src={noresult} width={250} height={250} alt="no items" className="rounded-md object-cover"/>
+                  <h3 className="font-semibold text-gray-700 text-lg pt-5">No products found</h3>
                   <p className="text-sm text-gray-500 pt-2 px-8">
-                    Sorry, we couldn&#39;t find any products matching your
-                    filters.
+                    Sorry, we couldn&#39;t find any products matching your filters.
                   </p>
                 </div>
               )}

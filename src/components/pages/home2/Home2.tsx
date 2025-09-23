@@ -56,6 +56,7 @@ interface Product {
   oldPrice?: number;
   discount?: number;
   colors?: string[];
+  handle: string; // <-- add this
 }
 
 // ------------------ Data ------------------
@@ -217,6 +218,7 @@ const products: Product[] = [
     price: 5000,
     oldPrice: 7000,
     discount: 28,
+    handle: "top-with-surplice-neckline",
   },
   {
     id: 2,
@@ -224,12 +226,14 @@ const products: Product[] = [
     title: "Cropped Top",
     price: 50000,
     colors: ["#f8c2c0", "#d6a6a0", "#e4b49a"],
+    handle: "top-with-surplice-neckline",
   },
   {
     id: 3,
     imageUrl: AppImages.home2.products.product3,
     title: "Epicurean iPad Case",
     price: 30000,
+    handle: "top-with-surplice-neckline",
   },
   {
     id: 4,
@@ -238,30 +242,35 @@ const products: Product[] = [
     price: 3000,
     oldPrice: 4000,
     discount: 25,
+    handle: "top-with-surplice-neckline",
   },
   {
     id: 5,
     imageUrl: AppImages.home2.products.product5,
     title: "Miya Necklace",
     price: 14800,
+    handle: "top-with-surplice-neckline",
   },
   {
     id: 6,
     imageUrl: AppImages.home2.products.product6,
     title: "Rio Cardigan",
     price: 27880,
+    handle: "top-with-surplice-neckline",
   },
   {
     id: 7,
     imageUrl: AppImages.home2.products.product7,
     title: "Tenda Bag",
     price: 114800,
+    handle: "top-with-surplice-neckline",
   },
   {
     id: 8,
     imageUrl: AppImages.home2.products.product8,
     title: "Aqualina Sandal",
     price: 35800,
+    handle: "top-with-surplice-neckline",
   },
 ];
 

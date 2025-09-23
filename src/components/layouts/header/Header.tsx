@@ -10,7 +10,7 @@ import AppImages from "@/config/constant/app.images";
 import DropdownMenus from "./DropdownMenus";
 import Cart from "@/components/pages/cart/Cart";
 import CustomInput from "@/components/ui/common/inputs/CustomInput";
-import { RootState } from "@reduxjs/toolkit/query";
+import { RootState } from "@/store/store";
 
 interface Category {
   title: string;

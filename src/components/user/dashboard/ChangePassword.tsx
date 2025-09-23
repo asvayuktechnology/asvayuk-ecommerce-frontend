@@ -5,20 +5,22 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import CustomInput from "@/components/ui/common/inputs/CustomInput";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import { changePasswordSchema } from "@/schemas/changePasswordSchemas/changePasswordSchemas";
+import z from "zod";
+type changePasswordSchemaData = z.infer<typeof changePasswordSchema>;
 
 const ChangePassword = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<changePasswordSchemaData>({
     resolver: zodResolver(changePasswordSchema),
     defaultValues: {
       email: "justin@gmail.com",
     },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: changePasswordSchemaData) => {
     console.log("Change Password Data:", data);
     alert(JSON.stringify(data));
   };

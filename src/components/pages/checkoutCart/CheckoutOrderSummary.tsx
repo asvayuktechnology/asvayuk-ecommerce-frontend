@@ -5,8 +5,8 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { FaTicketAlt } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store";
 import { CartItem } from "@/store/slice/cartSlice";
+import { RootState } from "@/store/store";
 
 export default function CheckoutOrderSummary() {
   const cartItems = useSelector(

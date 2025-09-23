@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { MouseEventHandler } from "react";
 import { FaPlus } from "react-icons/fa6";
 import { FiEye } from "react-icons/fi";
 
@@ -14,7 +13,8 @@ interface ProductCardProps {
   imageUrl: string;
   rating?: number;
   reviews?: number;
-  onClick?: MouseEventHandler<HTMLDivElement>;
+  // onClick?: MouseEventHandler<HTMLDivElement>;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>; // <-- change here;
 }
 
 export default function ProductCard({

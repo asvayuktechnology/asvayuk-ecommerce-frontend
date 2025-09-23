@@ -7,8 +7,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaTicketAlt } from "react-icons/fa";
-import { RootState } from "@reduxjs/toolkit/query";
 import { CartItem, removeFromCart } from "@/store/slice/cartSlice";
+import { RootState } from "@/store/store";
 
 export default function OrderSummary() {
   const dispatch = useDispatch();

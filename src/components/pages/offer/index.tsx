@@ -13,7 +13,7 @@ interface Coupon {
   deadline: Date;
 }
 
-interface Timer {
+interface Timer extends Record<string, string | number> {
   days: string;
   hours: string;
   minutes: string;

@@ -4,9 +4,9 @@ import React, { useState } from "react";
 interface QuantityCounterProps {
   quantity?: number;
   setQuantity?: React.Dispatch<React.SetStateAction<number>>;
-  className?: string;        // wrapper
+  className?: string; // wrapper
   decreaseBtnClass?: string; // left button
-  quantityClass?: string;    // quantity text
+  quantityClass?: string; // quantity text
   increaseBtnClass?: string; // right button
 }
 

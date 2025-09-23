@@ -30,7 +30,7 @@ interface Coupon {
   deadline: Date;
 }
 
-interface Timer {
+interface Timer extends Record<string, string | number> {
   days: string;
   hours: string;
   minutes: string;
@@ -71,10 +71,10 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
+      setLoading(true);
       try {
-        const data: Product[] = await getProducts();
-        setData(data);
-        setLoading(true);
+        const products: Product[] = await getProducts();
+        setData(products);
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -236,10 +236,10 @@ const Home: React.FC = () => {
                         id={item.id}
                         title={item.title}
                         price={item.price}
-                        stock={item.rating?.count || 0} // use rating count as stock
+                        stock={0} // or any default value
                         imageUrl={item.image}
-                        rating={item.rating?.rate || 0} // pass rate as rating
-                        reviews={item.rating?.count || 0} // pass count as reviews
+                        rating={0} // default rating
+                        reviews={0} // default reviews
                         onClick={() => openProductModal(item)}
                       />
                     ))}
@@ -322,10 +322,10 @@ const Home: React.FC = () => {
                         id={item.id}
                         title={item.title}
                         price={item.price}
-                        stock={item.rating?.count || 0} // use rating count as stock
+                        stock={0} // or any default value
                         imageUrl={item.image}
-                        rating={item.rating?.rate || 0} // pass rate as rating
-                        reviews={item.rating?.count || 0} // pass count as reviews
+                        rating={0} // default rating
+                        reviews={0} // default reviews
                         onClick={() => openProductModal(item)}
                       />
                     ))}

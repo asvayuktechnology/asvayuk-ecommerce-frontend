@@ -26,7 +26,9 @@ const cartSlice = createSlice({
       state,
       action: PayloadAction<Omit<CartItem, "quantity"> & { quantity?: number }>
     ) => {
-      const existing = state.items.find((item) => item.id === action.payload.id);
+      const existing = state.items.find(
+        (item) => item.id === action.payload.id
+      );
 
       if (existing) {
         existing.quantity += action.payload.quantity || 1;
@@ -37,8 +39,7 @@ const cartSlice = createSlice({
         });
       }
     },
-
-    removeFromCart: (state, action: PayloadAction<number>) => {
+    removeFromCart: (state, action: PayloadAction<number | string>) => {
       state.items = state.items.filter((item) => item.id !== action.payload);
     },
   },

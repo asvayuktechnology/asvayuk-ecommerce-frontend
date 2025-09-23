@@ -1,4 +1,3 @@
-// CustomTable.tsx
 "use client";
 import React from "react";
 
@@ -14,10 +13,7 @@ interface CustomTableProps<T> {
   data: T[];
 }
 
-const CustomTable = <T extends Record<string, unknown>>({
-  columns,
-  data,
-}: CustomTableProps<T>) => {
+const CustomTable = <T,>({ columns, data }: CustomTableProps<T>) => {
   return (
     <div className="overflow-x-auto">
       <table className="w-full border border-gray-200 rounded-lg overflow-hidden">
@@ -48,7 +44,9 @@ const CustomTable = <T extends Record<string, unknown>>({
                         col.align || "left"
                       }`}
                     >
-                      {col.render ? col.render(value, row) : value}
+                      {col.render
+                        ? col.render(value, row)
+                        : String(value ?? "")}
                     </td>
                   );
                 })}

@@ -3,12 +3,12 @@
 import React from "react";
 import CheckoutOrderSummary from "./CheckoutOrderSummary";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@reduxjs/toolkit/query";
 import Link from "next/link";
 import Image from "next/image";
 import QuantityCounter from "@/components/products/quantityCounter/QuantityCounter";
 import { CartItem, removeFromCart } from "@/store/slice/cartSlice";
 import noresult from "../../../../public/images/no-result.svg";
+import { RootState } from "@/store/store";
 
 export default function CheckoutCartPage() {
   const dispatch = useDispatch();
@@ -112,9 +112,7 @@ export default function CheckoutCartPage() {
                               <line x1="14" y1="11" x2="14" y2="17" />
                             </svg>
                           </button>
-                          <QuantityCounter 
-                            className="bg-white"
-                          />
+                          <QuantityCounter className="bg-white" />
                         </div>
                       </li>
                     ))}

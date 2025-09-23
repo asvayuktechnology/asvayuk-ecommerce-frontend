@@ -7,10 +7,10 @@ import QuantityCounter from "@/components/products/quantityCounter/QuantityCount
 import Image from "next/image";
 import Link from "next/link";
 import noresult from "../../../../public/images/no-result.svg";
-import { RootState } from "@reduxjs/toolkit/query";
+import { RootState } from "@/store/store";
 
 interface CartItem {
-  id: number | string;
+  id: number; // remove string
   title: string;
   image: string;
   price: number;
@@ -34,7 +34,7 @@ export default function Cart({ isOpen, onClose }: CartProps) {
   );
 
   const handleRemove = (id: number | string) => {
-    dispatch(removeFromCart(id));
+    dispatch(removeFromCart(Number(id))); // force it to number
   };
 
   return (

@@ -97,7 +97,7 @@ const columns: Column<Order>[] = [
     key: "status",
     label: "Status",
     align: "center",
-    render: (value: Order["status"]) => (
+    render: (value) => (
       <span
         className={`text-sm font-medium ${
           value === "Delivered" ? "text-emerald-500" : "text-yellow-500"
@@ -111,15 +111,17 @@ const columns: Column<Order>[] = [
     key: "total",
     label: "Total",
     align: "center",
-    render: (value: Order["total"]) => (
-      <span className="text-sm font-bold">{value.toFixed(2)}</span>
+    render: (value) => (
+      <span className="text-sm font-bold">
+        {typeof value === "number" ? value.toFixed(2) : value}
+      </span>
     ),
   },
   {
     key: "action",
     label: "Action",
     align: "right",
-    render: (_value: unknown, row: Order) => (
+    render: (_value, row) => (
       <Link
         className="px-3 py-1 bg-emerald-100 text-xs text-emerald-600 hover:bg-emerald-500 hover:text-white transition-all font-semibold rounded-full"
         href={`/order/${row.id}`}

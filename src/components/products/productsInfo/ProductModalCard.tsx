@@ -37,7 +37,7 @@ const ProductModalCard: React.FC<ProductModalCardProps> = ({
   if (!isOpen || !product) return null;
 
   const handleAddToCart = () => {
-    dispatch(addToCart({ ...product, quantity }));
+    dispatch(addToCart({ ...product, id: Number(product.id), quantity }));
     setQuantity(1);
     onClose();
   };

@@ -18,9 +18,9 @@ interface Product {
   image: string;
   description?: string;
   category: string;
-  tags?: string[];
-  stock?: number;
-  rating: {
+  tags?: string[]; // optional tags
+  stock?: number; // optional stock
+  rating?: {
     rate: number;
     count: number;
   };
@@ -52,20 +52,17 @@ export default function ProductDetail() {
     setIsModalOpen(true);
   };
 
-  // Fetch related products
+  // Fetch all products for related products
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const products: Product[] = await getProducts();
-        // Filter out current product
         const filtered = products
           .filter((p) => String(p.id) !== id)
-          .slice(0, 6);
+          .slice(0, 6); // limit related products
         setData(filtered);
       } catch (error) {
         console.error("Error fetching products:", error);
-      } finally {
-        setLoading(false);
       }
     };
     fetchProducts();
@@ -76,13 +73,24 @@ export default function ProductDetail() {
     const fetchProduct = async () => {
       try {
         const products = await getProducts();
-        const found = products.find((item) => String(item.id) === id);
+        const normalizedProducts = products.map((p) => ({
+          ...p,
+          rating: p.rating || { rate: 0, count: 0 },
+        }));
+
+        const found = normalizedProducts.find((item) => String(item.id) === id);
         if (found) {
           setProduct({ ...defaultProduct, ...found });
           setImages([found.image || defaultProduct.image]);
         }
+
+        // Related products
+        const related = normalizedProducts
+          .filter((p) => String(p.id) !== id)
+          .slice(0, 6);
+        setData(related);
       } catch (err) {
-        console.error("Error fetching product:", err);
+        console.error(err);
       } finally {
         setLoading(false);
       }
@@ -93,10 +101,21 @@ export default function ProductDetail() {
 
   if (loading)
     return (
-      <p className="p-10 text-center">
+      <div className="p-10 text-center">
         <FullPageLoader />
-      </p>
+      </div>
     );
+
+  // Reviews
+  const reviewCount = Math.min(product.rating?.count || 0, 3); // max 3 reviews
+  const reviews = Array.from({ length: reviewCount }, (_, i) => ({
+    name: `Customer ${i + 1}`,
+    avatar: noresult,
+    rating: Math.round(product.rating?.rate || 5),
+    date: new Date().toLocaleDateString(),
+    comment: "Sample review",
+    images: [],
+  }));
 
   return (
     <section className="bg-gray-50 dark:bg-zinc-900 z-10">
@@ -104,7 +123,7 @@ export default function ProductDetail() {
         <div className="container mx-auto px-3 sm:px-10 max-w-screen-2xl">
           {/* Breadcrumb */}
           <div className="flex items-center py-6 lg:py-8">
-            <ol className="flex items-center w-full overflow-hidden ">
+            <ol className="flex items-center w-full overflow-hidden">
               <li className="text-sm pr-1 font-semibold">
                 <Link href="/">Home</Link>
               </li>
@@ -127,27 +146,38 @@ export default function ProductDetail() {
             </div>
 
             {/* Content */}
-            <div className="lg:sticky top-44 mt-6 lg:mt-0 self-start z-10 mx-auto lg:col-span-4 lg:row-span-2 lg:row-end-2 lg:w-[80%] bg-white w-[100%]">
-              <ProductDetailContent product={product} />
+            <div className="lg:sticky top-44 mt-6 lg:mt-0 self-start z-10 mx-auto lg:col-span-4 lg:row-span-2 lg:row-end-2 lg:w-[80%] bg-white w-full">
+              <ProductDetailContent
+                product={{
+                  ...product,
+                  description:
+                    product.description || "No description available",
+                  stock: product.stock ?? 10,
+                  tags: product.tags ?? ["Default", "Category"],
+                }}
+              />
             </div>
 
             {/* Tabs */}
             <div className="mx-auto w-full lg:col-span-3 lg:my-0 my-8 lg:max-w-none">
               <ProductTabs
-                description={product.description || defaultProduct.description}
-                reviewsCount={product.rating?.count || 0}
+                description={product.description}
+                reviews={reviews}
               />
             </div>
           </div>
 
+          {/* Related Products */}
           <div className="pt-10 lg:pt-20 lg:pb-10">
             <h3 className="text-xl font-semibold tracking-tight text-pretty sm:text-3xl mb-6">
               Related Products
             </h3>
             <div className="flex">
               <div className="w-full">
-                {loading ? (
-                  <FullPageLoader />
+                {data.length === 0 ? (
+                  <p className="text-center text-gray-500">
+                    No related products found.
+                  </p>
                 ) : (
                   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 2xl:grid-cols-6 gap-2 md:gap-3 lg:gap-3">
                     {data.map((item) => (
@@ -156,10 +186,10 @@ export default function ProductDetail() {
                         id={item.id}
                         title={item.title}
                         price={item.price}
-                        stock={item.rating?.count || 0} // use rating count as stock
+                        stock={item.rating?.count || 0}
                         imageUrl={item.image}
-                        rating={item.rating?.rate || 0} // pass rate as rating
-                        reviews={item.rating?.count || 0} // pass count as reviews
+                        rating={item.rating?.rate || 0}
+                        reviews={item.rating?.count || 0}
                         onClick={() => openProductModal(item)}
                       />
                     ))}
@@ -171,6 +201,7 @@ export default function ProductDetail() {
         </div>
       </div>
 
+      {/* Modal */}
       <ProductModalCard
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
