@@ -4,17 +4,20 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userSchemas } from "@/schemas/userSchemas/userSchemas";
 import CustomInput from "@/components/ui/common/inputs/CustomInput";
+import z from "zod";
+
+type UserFormData = z.infer<typeof userSchemas>;
 
 const Page = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<UserFormData>({
     resolver: zodResolver(userSchemas),
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: UserFormData) => {
     console.log("Signup Data:", data);
     alert(JSON.stringify(data));
   };
