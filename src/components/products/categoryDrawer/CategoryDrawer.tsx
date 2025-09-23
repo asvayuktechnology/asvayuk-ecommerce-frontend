@@ -13,6 +13,7 @@ import { FiFileMinus, FiUsers } from "react-icons/fi";
 import { HiOutlineExclamationCircle } from "react-icons/hi2";
 import Image from "next/image";
 import AppImages from "@/config/constant/app.images";
+import { JSX } from "react";
 
 interface Category {
   name: string;
