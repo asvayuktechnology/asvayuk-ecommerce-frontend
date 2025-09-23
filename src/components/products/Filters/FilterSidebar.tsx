@@ -53,14 +53,14 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
       {/* Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-10 lg:hidden"
+          className="fixed inset-0 bg-black/50 z-20 lg:hidden"
           onClick={() => setIsOpen(false)}
         />
       )}
 
       {/* Sidebar */}
       <aside
-        className={`z-10 fixed top-0 left-0 w-80 h-full p-5 transform transition-transform duration-300 rounded-2xl
+        className={`z-20 fixed top-0 left-0 w-80 h-full p-5 transform transition-transform duration-300 rounded-2xl
           ${
             isOpen ? "translate-x-0" : "-translate-x-full"
           } lg:translate-x-0 lg:static bg-white overflow-y-auto`}

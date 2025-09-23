@@ -312,7 +312,7 @@ const Footer: React.FC = () => {
         </div>
       </footer>
 
-      <footer className="lg:hidden fixed z-30 bottom-0 bg-emerald-500 flex items-center justify-between w-full h-16 px-3 sm:px-10">
+      <footer className="lg:hidden fixed z-15 bottom-0 bg-emerald-500 flex items-center justify-between w-full h-16 px-3 sm:px-10">
         {/* Menu Icon Button */}
         <button
           aria-label="Bar"
