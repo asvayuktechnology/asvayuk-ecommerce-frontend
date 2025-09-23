@@ -6,6 +6,7 @@ interface AppImagesType {
   about: ImageMap;
   banner: ImageMap;
   footerImg: ImageMap;
+  searchImg: ImageMap;
   home2: {
     categories: ImageMap;
     customers: ImageMap;
@@ -57,6 +58,12 @@ const AppImages: AppImagesType = {
     googlePlay: "/images/footer-img/googlePlay.png",
     paymentLogo: "/images/footer-img/paymentlogo.webp",
     playStoreLogo: "/images/footer-img/playStoreLogo.svg",
+  },
+
+  searchImg: {
+    ctaBg1: "/images/searchImg/cta-bg-1.webp",
+    ctaBg2: "/images/searchImg/cta-bg-2.webp",
+    ctaBg3: "/images/searchImg/cta-bg-3.webp",
   },
 
   home2: {
